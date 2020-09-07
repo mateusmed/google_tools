@@ -12,8 +12,6 @@ function doGet(event) {
     var editProduct = getPage("editProduct");
     editProduct["productId"] = productId;
 
-    PropertiesService.getScriptProperties().setProperty("productId", productId);
-
     return editProduct.evaluate();
   }
 
