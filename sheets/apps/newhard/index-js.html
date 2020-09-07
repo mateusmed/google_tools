@@ -1,0 +1,27 @@
+<script>
+
+    $(function() {
+        google.script.run.withSuccessHandler(renderIndex).indexHtmlBuilded();
+    });
+
+    function renderIndex(html) {
+
+        var index = $('#index');
+        index.html(html);
+
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    }
+
+
+    document.getElementById("btn").addEventListener("click", create);
+
+    function create(){
+        let name = document.getElementById("username").value;
+        google.script.run.create(name);
+        document.getElementById("username").value = "";
+    }
+</script>
+

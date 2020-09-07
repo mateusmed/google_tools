@@ -1,0 +1,16 @@
+
+<script>
+
+    $(function() {
+        google.script.run.withSuccessHandler(renderEditProduct).editProductHtmlBuilded(productId);
+    });
+
+    function renderEditProduct(html) {
+
+        var editProduct = $('#editProduct');
+        editProduct.html(html);
+    }
+
+</script>
+
+

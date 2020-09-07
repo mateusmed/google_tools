@@ -1,19 +1,34 @@
-
 //not visible of the user, inside server
 function doGet(event) {
 
-  Logger.log(event);
-  return HtmlService.createHtmlOutputFromFile("index");
+  Logger.log("event.parameters " + JSON.stringify(event.parameters["product"]));
 
+  if(event.parameters != undefined &&
+     event.parameters["product"] != null &&
+     event.parameters["product"] != ""){
+
+    let productId = event.parameters["product"];
+
+    var editProduct = getPage("editProduct");
+    editProduct["productId"] = productId;
+
+    PropertiesService.getScriptProperties().setProperty("productId", productId);
+
+    return editProduct.evaluate();
+  }
+
+  var index = getPage("index");
+  return index.evaluate();
 }
 
-function userClicked(name){
 
-  var url = "https://docs.google.com/spreadsheets/d/1i2NOiagih_MhBoxClr59Lmecux7HatknkZmTFb22YU8/edit#gid=0"
-  var ss = SpreadsheetApp.openByUrl(url)
+function create(name){
+
+  var ss = SpreadsheetApp.openByUrl(urlDatabase)
   var ws = ss.getSheetByName("sheet1")
 
   ws.appendRow([name])
 
   Logger.log(name + " Someone clicked on page");
 }
+
