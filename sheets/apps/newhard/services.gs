@@ -14,6 +14,10 @@ async function getById(from, id) {
 
   let list =  ws.getDataRange().getValues();
 
+
+  //try to use this method < ---
+  //ws.getRowHeight(rowPosition)
+
   let find = list.filter((item) => {
                          return item[0] = id;
               })
