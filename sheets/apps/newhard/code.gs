@@ -1,7 +1,7 @@
 //not visible of the user, inside server
 function doGet(event) {
 
-  Logger.log("event.parameters " + JSON.stringify(event.parameters["product"]));
+  Logger.log("event.parameters " + JSON.stringify(event.parameters));
 
   if(event.parameters != undefined &&
      event.parameters["product"] != null &&
@@ -9,13 +9,27 @@ function doGet(event) {
 
     let productId = event.parameters["product"];
 
-    var editProduct = getPage("editProduct");
+    let editProduct = getPage("editProduct");
     editProduct["productId"] = productId;
 
     return editProduct.evaluate();
   }
 
-  var index = getPage("index");
+  let index = getPage("index");
+  return index.evaluate();
+}
+
+
+//https://www.labnol.org/code/19871-get-post-requests-google-script
+// cross origin problem
+function doPost(request){
+
+  // do post por dentro do html funciona mas não consigo receber o objeto
+  Logger.log("body " + request.body);
+  Logger.log("event POST form " + JSON.stringify(request));
+
+  // consigo fazer o redirecionamento
+  let index = getPage("index");
   return index.evaluate();
 }
 

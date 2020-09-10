@@ -1,5 +1,7 @@
 const urlDatabase = "https://docs.google.com/spreadsheets/d/1i2NOiagih_MhBoxClr59Lmecux7HatknkZmTFb22YU8/edit#gid=0"
 
+
+
 async function getAll(from) {
 
   let ss = SpreadsheetApp.openByUrl(urlDatabase)
@@ -8,23 +10,45 @@ async function getAll(from) {
   return ws.getDataRange().getValues();
 }
 
+
 async function getById(from, id) {
   let ss = SpreadsheetApp.openByUrl(urlDatabase)
   let ws = ss.getSheetByName(from)
 
   let list =  ws.getDataRange().getValues();
 
-
-  //try to use this method < ---
-  //ws.getRowHeight(rowPosition)
-
   let find = list.filter((item) => {
-                         return item[0] = id;
-              })
+                              return (item[0] == id);
+                         })
 
-  //validate if find
+  if(find[0] === undefined){
+      return [];
+  }
 
   return find[0];
+}
+
+
+
+function updateItem(item){
+
+  Logger.log("item " + item);
+
+  let ss = SpreadsheetApp.openByUrl(urlDatabase);
+  let ws = ss.getSheetByName("products");
+
+  let id = item[0];
+  item.splice(0, 1);
+
+  //row  - linha inicial,
+  //column -  coluna inicial,
+  //numRows -  numero de linhas a partir da "row" escolhida,
+  //numColumns -  numero de colunas a partir da "column" escolhida,
+  //ws.getRange(row, column, numRows, numColumns)
+
+  ws.getRange(id, 2, 1, 5).setValues([item]);
+
+  return true;
 }
 
 
