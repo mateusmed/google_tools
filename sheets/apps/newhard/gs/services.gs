@@ -64,3 +64,16 @@ function getOptions(){
 
   return list;
 }
+
+
+
+function create(name){
+
+  var ss = SpreadsheetApp.openByUrl(urlDatabase)
+  var ws = ss.getSheetByName("sheet1")
+
+  ws.appendRow([name])
+
+  Logger.log(name + " Someone clicked on page");
+}
+

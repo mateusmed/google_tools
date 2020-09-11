@@ -1,0 +1,56 @@
+
+<script>
+
+
+    function renderEditProduct(html) {
+
+        var editProduct = $('#editProduct');
+        editProduct.html(html);
+        document.getElementById("editar").addEventListener("click", edit);
+    }
+
+
+    function getDataForm(){
+
+        return     [$("#id").val(),
+            $("#name").val(),
+            $("#qtd").val(),
+            $("#ppuc").val(),
+            $("#ppuv").val(),
+            $("#description").val()];
+    }
+
+
+    function renderMessageResponse(typeAlert, message){
+
+        let msg = `<div class="alert alert-${typeAlert}" role="alert">
+                      ${message}
+                  </div>`
+
+        console.log('msg', msg);
+        var message = $('#message-box');
+        message.html(msg);
+    }
+
+    function cleanMessageResponse(){
+        var message = $('#message-box');
+        message.html("");
+    }
+
+    function edit(){
+
+        cleanMessageResponse()
+
+        let data = getDataForm();
+        google.script.run.withSuccessHandler(renderMessageResponse("primary", "message")).
+        withFailureHandler(renderMessageResponse("danger", "deu merda ai")).updateItem(data);
+    }
+
+
+    $(function() {
+        google.script.run.withSuccessHandler(renderEditProduct).editProductHtmlBuilded(productId);
+    });
+
+</script>
+
+
