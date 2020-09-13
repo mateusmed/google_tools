@@ -1,0 +1,57 @@
+
+<script>
+
+    $(function() {
+        google.script.run.withSuccessHandler(renderProductPage).productHtmlBuilded(productId);
+    });
+
+    function renderProductPage(html) {
+    
+       var productPage = $('#product');
+       productPage.html(html);
+       document.getElementById("save").addEventListener("click", save);
+    }
+    
+    function getDataForm(){
+    
+        return [$("#id").val(),
+                $("#name").val(),
+                $("#qtd").val(),
+                $("#ppuc").val(),
+                $("#ppuv").val(),
+                $("#description").val()];
+    }
+    
+    
+    function renderMessageResponse(typeAlert, message){
+    
+       let msg = `<div class="alert alert-${typeAlert}" role="alert">
+                      ${message}
+                  </div>`
+
+       let content = $('#message-box');
+       content.html(msg);
+    }
+    
+    function cleanMessageBox(){
+       var message = $('#message-box');
+	   message.html("");       
+    }
+    
+     function save(){
+
+        cleanMessageBox()
+
+        // validar informações REQUIRED
+        let data = getDataForm();
+
+        alert(data);
+
+        google.script.run.withSuccessHandler(renderMessageResponse("primary", "message")).saveOrUpdateProduct(data);
+
+     }   
+
+    
+</script>
+
+

@@ -8,8 +8,10 @@ async function input(label, type, id, value, disabled){
   if(disabled === undefined){
      disabled = ""
   }
-  
-  let forTag = label + "Input";
+
+  if(value === undefined){
+      value = "";
+  }
 
   return `<div class="form-group">
                <label for="${id}"> ${label}</label>
@@ -32,8 +34,10 @@ async function headerMenu(page){
   
   let mainText = "NEW HARD";
 
-  let newProduct = currentUrl() + "/new-product";
+  let product = currentUrl() + "/product";
   let sale = currentUrl() + "/sale";
+  let statistics = currentUrl() + "/statistics";
+  let onlineConsultation = currentUrl() + "/onlineConsultation";
 
   let headerMenuList = `<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
                         <a class="navbar-brand" href="${currentUrl()}">${mainText}</a>
@@ -51,16 +55,16 @@ async function headerMenu(page){
                        <ul class="navbar-nav">
       
            <li class="nav-item {new-product}">
-               <a class="nav-link" href="${newProduct}">Novo Produto </a>
+               <a class="nav-link" href="${product}">Novo Produto </a>
            </li>
           <li class="nav-item {sale}">
              <a class="nav-link" href="${sale}"> Venda </a>
           </li>
           <li class="nav-item {statistic}">
-             <a class="nav-link" href="#">Estatistica</a>
+             <a class="nav-link" href="${statistics}">Estatistica</a>
           </li>
           <li class="nav-item {statistic}">
-             <a class="nav-link" href="#">Consulta Online</a>
+             <a class="nav-link" href="${onlineConsultation}">Consulta Online</a>
           </li>
        </ul>
        </div>
@@ -72,7 +76,7 @@ async function headerMenu(page){
 
 async function tableHtml(){
     
-   let productMatriz = await getAll("products");
+   let productMatriz = await getAllProducts();
   
    let table = [];
   
@@ -98,7 +102,7 @@ async function tableHtml(){
   
    for(let i = 0; i < productMatriz.length; i++){
       
-      let destiny = currentUrl() + "/edit-product?product="+ productMatriz[i][0];
+      let destiny = currentUrl() + "/product?id="+ productMatriz[i][0];
      
       table.push(
       `<tr>

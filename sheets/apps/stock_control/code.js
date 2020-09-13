@@ -6,14 +6,14 @@ function doGet(event) {
   let path = event.pathInfo;
 
   switch(path) {
-    case "edit-product":
-      return editProductPage(event)
+    case "product":
+      return productPage(event)
 
-    case "new-product":
-      return newProductPage()
+    // case "new-product":
+    //   return newProductPage()
 
-    case "sale":
-      return newProductPage()
+    // case "sale":
+    //   return newProductPage()
 
     default:
        return indexPage();
@@ -25,17 +25,18 @@ function indexPage(){
   return index.evaluate();
 }
 
-function editProductPage(event){
-  let editProduct = getPage("view/editProduct/edit-product");
-  editProduct["productId"] = event.parameters["product"];
+function productPage(event){
+  let productPage = getPage("view/product/product");
 
-  return editProduct.evaluate();
+  if(event.parameters["id"] === undefined){
+    productPage["productId"] = "null";
+  }else{
+    productPage["productId"] = event.parameters["id"];
+  }
+
+  return productPage.evaluate();
 }
 
-function newProductPage(){
-  let index = getPage("view/newProduct/new-product");
-  return index.evaluate();
-}
 
 
 
