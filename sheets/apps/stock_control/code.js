@@ -11,7 +11,7 @@ function doGet(event) {
     
     let productId = event.parameters["product"];
     
-    let editProduct = getPage("editProduct");
+    let editProduct = getPage("view/editProduct/edit-product");
     editProduct["productId"] = productId;       
     
     return editProduct.evaluate();  

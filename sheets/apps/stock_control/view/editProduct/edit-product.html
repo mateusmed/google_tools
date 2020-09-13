@@ -11,7 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     
     <base target="_top">
-    <?!= include("spinner-css"); ?>
+    <?!= include("view/components/spinner-css"); ?>
   </head>
   <body>
   
@@ -29,10 +29,10 @@
     <!-- this script need to be here to foward productId variable-->
     <!-- when render another file the context is lost, this need to be here-->
     <script>
-        let productId = <?=productId?>;
+        let productId = <?=productId?>
     </script>
     
-    <?!= include("editProduct-js"); ?>
+    <?!= include("view/editProduct/edit-product-js"); ?>
     
   </body>
 </html>

@@ -96,22 +96,21 @@ async function tableHtml(){
   
    for(let i = 0; i < productMatriz.length; i++){
       
-      let destiny = currentUrl() + "?product="+ productMatriz[i][0];
+      let destiny = currentUrl() + "/edit-product?product="+ productMatriz[i][0];
      
       table.push(
-      
       `<tr>
-       <td> ${productMatriz[i][0]} </td> 
-       <td> ${productMatriz[i][1]} </td>
-       <td> ${productMatriz[i][2]} </td>
-       <td> ${productMatriz[i][3]} </td>
-       <td> ${productMatriz[i][4]} </td> 
-       <td> ${productMatriz[i][5]} </td>
-       <td> 
-            <a class="btn btn-outline-primary" href=" ${destiny}"role="button">
-               Edit
-            </a>
-       </td> 
+           <td> ${productMatriz[i][0]} </td> 
+           <td> ${productMatriz[i][1]} </td>
+           <td> ${productMatriz[i][2]} </td>
+           <td> ${productMatriz[i][3]} </td>
+           <td> ${productMatriz[i][4]} </td> 
+           <td> ${productMatriz[i][5]} </td>
+           <td> 
+                <a class="btn btn-outline-primary" href=" ${destiny}"role="button">
+                   Edit
+                </a>
+           </td> 
        </tr> `
       );
     }
