@@ -1,34 +1,42 @@
 //not visible of the user, inside server
 function doGet(event) {
 
+  Logger.log("event" + JSON.stringify(event));
+
   let path = event.pathInfo;
 
-  Logger.log("event.parameters " + JSON.stringify(event));
-  
-  if(event.parameters !== undefined &&
-     event.parameters["product"] != null && 
-     event.parameters["product"] !== ""){
-    
-    let productId = event.parameters["product"];
-    
-    let editProduct = getPage("view/editProduct/edit-product");
-    editProduct["productId"] = productId;       
-    
-    return editProduct.evaluate();  
+  switch(path) {
+    case "edit-product":
+      return editProductPage(event)
+
+    case "new-product":
+      return newProductPage()
+
+    case "sale":
+      return newProductPage()
+
+    default:
+       return indexPage();
   }
-  
+}
+
+function indexPage(){
   let index = getPage("view/index/index");
   return index.evaluate();
-  
-  // if(path == "newproduct"){
-  //     let page = getPage("index");
-  //     return page.evaluate();
-  // }
-  //
-  // let page = getPage("index");
-  // return page.evaluate();
- 
 }
+
+function editProductPage(event){
+  let editProduct = getPage("view/editProduct/edit-product");
+  editProduct["productId"] = event.parameters["product"];
+
+  return editProduct.evaluate();
+}
+
+function newProductPage(){
+  let index = getPage("view/newProduct/new-product");
+  return index.evaluate();
+}
+
 
 
 //https://www.labnol.org/code/19871-get-post-requests-google-script

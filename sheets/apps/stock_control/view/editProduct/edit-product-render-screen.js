@@ -31,6 +31,6 @@ async function formProduct(product){
         ${await input("Preço unidade compra", "text", "ppuc", product[3])}
         ${await input("Preço unidade venda", "text", "ppuv", product[4])}        
         ${await input("Descrição", "text", "description", product[5])}
-        ${await button("editar", "salvar")}
+        ${await button("edit", "salvar")}
       </div>`
 }
