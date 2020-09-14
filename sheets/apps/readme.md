@@ -48,6 +48,11 @@ To send project from server
 clasp push
 ```
 
+-- if class is not working
+```
+clasp push && clasp push
+```
+
 To send project from server, automatically when you save the file
 ```
 clasp push -w

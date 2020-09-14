@@ -1,19 +1,52 @@
+
 const urlDatabase = "https://docs.google.com/spreadsheets/d/1i2NOiagih_MhBoxClr59Lmecux7HatknkZmTFb22YU8/edit#gid=0"
 
 
 async function getAll(from) {
-  
+
   let ss = SpreadsheetApp.openByUrl(urlDatabase)
   let ws = ss.getSheetByName(from)
-  
+
   return ws.getDataRange().getValues();
 }
 
 
+async function getWhenColumnEqualValue(from, columnId, value) {
+  let ss = SpreadsheetApp.openByUrl(urlDatabase);
+  let ws = ss.getSheetByName(from);
+
+  let list =  ws.getDataRange().getValues();
+  let find = list.filter((item) => {
+    Logger.log("item " + JSON.stringify(item));
+    Logger.log("item[columnId] " + JSON.stringify(item[columnId]));
+    Logger.log("item[columnId] == value " + JSON.stringify(item[columnId] == value));
+
+    return (item[columnId] == value);
+  })
+
+  Logger.log("find " + JSON.stringify(find));
+  return find;
+}
+
+
+async function getByIdList(from, idList) {
+  let ss = SpreadsheetApp.openByUrl(urlDatabase);
+  let ws = ss.getSheetByName(from);
+
+  let list =  ws.getDataRange().getValues();
+  let find = list.filter((item) => {
+    return ( idList.includes(item[0]) );
+  })
+
+  return find;
+}
+
+
+
 async function getById(from, id) {
-  let ss = SpreadsheetApp.openByUrl(urlDatabase)
-  let ws = ss.getSheetByName(from)
-  
+  let ss = SpreadsheetApp.openByUrl(urlDatabase);
+  let ws = ss.getSheetByName(from);
+
   let list =  ws.getDataRange().getValues();
   let find = list.filter((item) => {
                               return (item[0] == id);
@@ -22,12 +55,12 @@ async function getById(from, id) {
   if(find[0] === undefined){
       return [];
   }
-  
+
   return find[0];
 }
 
 
-function createItem(from, item){
+function createItem(from, item, numColumns){
 
   let ss = SpreadsheetApp.openByUrl(urlDatabase);
   let ws = ss.getSheetByName(from);
@@ -36,7 +69,7 @@ function createItem(from, item){
   let id = lastRow + 1;
   item[0] = id;
 
-  ws.getRange(id, 1, 1, 6).setValues([item]);
+  ws.getRange(id, 1, 1, numColumns).setValues([item]);
 
   return true;
 }
@@ -44,7 +77,7 @@ function createItem(from, item){
 
 
 
-function updateItem(from, item){
+function updateItem(from, item, numColumns){
 
   Logger.log("item " + item);
 
@@ -59,8 +92,9 @@ function updateItem(from, item){
   //numRows -  numero de linhas a partir da "row" escolhida,
   //numColumns -  numero de colunas a partir da "column" escolhida,
   //ws.getRange(row, column, numRows, numColumns)
+  numColumns = numColumns - 1;
 
-  ws.getRange(id, 2, 1, 5).setValues([item]);
+  ws.getRange(id, 2, 1, numColumns).setValues([item]);
 
   return true;
 }

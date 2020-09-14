@@ -9,7 +9,9 @@ async function productHtmlBuilded(productId){
     return Promise.all(productPage);
   }
 
-  let product = await getProductById(productId);
+
+  let productService = new ProductDao();
+  let product = await productService.getProductById(productId);
 
   productPage.push(headerMenu());
   productPage.push("<br/>");
@@ -20,6 +22,7 @@ async function productHtmlBuilded(productId){
 
 async function formProduct(product){
 
+  //todo pensar em uma maneira mais inteligente
   if (product === undefined){
      product = ["", "", "", "", "", ""];
   }
@@ -35,6 +38,9 @@ async function formProduct(product){
         ${await input("Preço unidade compra", "number", "ppuc", product[3])}
         ${await input("Preço unidade venda", "number", "ppuv", product[4])}        
         ${await input("Descrição", "text", "description", product[5])}
+        
+        
+        
         ${await button("save", "salvar")}
       </div>`
 }

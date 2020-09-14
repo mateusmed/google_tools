@@ -75,8 +75,9 @@ async function headerMenu(page){
 
 
 async function tableHtml(){
-    
-   let productMatriz = await getAllProducts();
+
+   let productService = new ProductDao();
+   let productMatriz = await productService.getAllProducts();
   
    let table = [];
   
