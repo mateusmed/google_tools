@@ -21,26 +21,21 @@ class InvestmentDao{
 
     async getInvestmentByProductId(productId) {
 
-        Logger.log("productId " + JSON.stringify(productId));
-        Logger.log("this.investmentColumns.indexOf(\"id_product\") " + this.investmentColumns.indexOf("id_product"));
-
         let investmentList =  await getWhenColumnEqualValue(this.investmentTable,
                                                             this.getIndex("id_product"),
                                                             productId);
-
         let investmentDTOS = []
 
-        investmentList.map( async (item) => {
+        const promises = investmentList.map( async (item) => {
 
             let partnerId = item[this.getIndex("id_partner")];
             let partnerObj = await this.partnerDao.getPartnerById(partnerId);
-
-            Logger.log("partnerObj " + JSON.stringify(partnerObj));
-
             investmentDTOS.push(new InvestmentDTO(item, partnerObj));
         });
 
-        Logger.log("investmentDTOS " + JSON.stringify(Promise.all(investmentDTOS)));
+        await Promise.all(promises);
+
+        Logger.log("investmentDTOS " + JSON.stringify(investmentDTOS));
 
         return investmentDTOS;
     }
