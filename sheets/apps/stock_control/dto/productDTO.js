@@ -16,6 +16,8 @@ class ProductDTO {
     }
 }
 
+
+// add to another local
 class InvestmentDTO {
 
     constructor(investment, partnerobj) {
