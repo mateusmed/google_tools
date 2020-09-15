@@ -20,6 +20,7 @@ async function productHtmlBuilded(productId){
   return Promise.all(productPage);
 }
 
+//todo colocar o formulario de investimento
 async function formProduct(product){
 
   //todo pensar em uma maneira mais inteligente

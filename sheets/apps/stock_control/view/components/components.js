@@ -73,46 +73,43 @@ async function headerMenu(page){
     return headerMenuList.replace(`{${page}}`, "active")
 }
 
+//todo tornar o mais generico possível
+async function tableHtml(itemList, headerList){
 
-async function tableHtml(){
-
-   let productService = new ProductDao();
-   let productMatriz = await productService.getAllProducts();
+   let itemMatriz = await itemList;
   
    let table = [];
   
- table.push(
-   `<div class="table-responsive">
-   <table id="dtBasicExample" 
-       class="table table-striped table-bordered table-sm" 
-       cellspacing="0" 
-       width="50%"> 
-      <thead> 
-        <tr> 
-          <th class="th-sm"> Id </th> 
-          <th class="th-sm"> Nome </th> 
-          <th class="th-sm"> Quantidade </th> 
-          <th class="th-sm"> Preço Unidade compra </th> 
-          <th class="th-sm"> Preço unidade Venda </th> 
-          <th class="th-sm"> Descrição </th> 
-          <th class="th-sm"> Action </th> 
-        </tr> 
-      </thead> 
-  <tbody`);
+   table.push(
+       `<div class="table-responsive">
+       <table id="dtBasicExample" 
+           class="table table-striped table-bordered table-sm" 
+           cellspacing="0" 
+           width="50%"> 
+          <thead> 
+            <tr>`);
+
+              headerList.map((item) => {
+                  table.push(`<th class="th-sm"> ${item} </th>`);
+              });
+
+    table.push( `</tr> 
+          </thead> 
+        <tbody>`);
+
   
-  
-   for(let i = 0; i < productMatriz.length; i++){
+   for(let i = 0; i < itemMatriz.length; i++){
       
-      let destiny = currentUrl() + "/product?id="+ productMatriz[i][0];
+      let destiny = currentUrl() + "/product?id="+ itemMatriz[i][0];
      
       table.push(
       `<tr>
-           <td> ${productMatriz[i][0]} </td> 
-           <td> ${productMatriz[i][1]} </td>
-           <td> ${productMatriz[i][2]} </td>
-           <td> ${productMatriz[i][3]} </td>
-           <td> ${productMatriz[i][4]} </td> 
-           <td> ${productMatriz[i][5]} </td>
+           <td> ${itemMatriz[i][0]} </td> 
+           <td> ${itemMatriz[i][1]} </td>
+           <td> ${itemMatriz[i][2]} </td>
+           <td> ${itemMatriz[i][3]} </td>
+           <td> ${itemMatriz[i][4]} </td> 
+           <td> ${itemMatriz[i][5]} </td>
            <td> 
                 <a class="btn btn-outline-primary" href="${destiny}" role="button">
                    Edit
@@ -122,10 +119,10 @@ async function tableHtml(){
       );
     }
     
-  table.push( ` </tr> 
-                </tbody> 
-                </table>
-                </div>`);
+    table.push( ` </tr> 
+                  </tbody> 
+                  </table>
+                  </div>`);
   
   return table.join("");
 }
