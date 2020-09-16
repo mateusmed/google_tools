@@ -5,8 +5,6 @@ async function indexHtmlBuilded(){
 
   let products = new ProductDao().getAllProducts();
 
-  Logger.log("Products: " + JSON.stringify(products));
-
   let headerList = ["Id",
                     "Nome",
                     "Quantidade",

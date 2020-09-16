@@ -59,10 +59,6 @@ async function getWhenColumnEqualValue(from, columnId, value) {
 
   let list =  ws.getDataRange().getValues();
   let find = list.filter((item) => {
-    Logger.log("item " + JSON.stringify(item));
-    Logger.log("item[columnId] " + JSON.stringify(item[columnId]));
-    Logger.log("item[columnId] == value " + JSON.stringify(item[columnId] == value));
-
     return (item[columnId] == value);
   })
 
@@ -105,6 +101,8 @@ async function getById(from, id) {
 
 
 function createItem(from, item, numColumns){
+
+  Logger.log("======> create item");
 
   let ss = SpreadsheetApp.openByUrl(urlDatabase);
   let ws = ss.getSheetByName(from);

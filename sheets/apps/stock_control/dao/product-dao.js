@@ -12,8 +12,6 @@ class ProductDao{
 
     async getProductById(productId) {
 
-        Logger.log("getProductById" + JSON.stringify(productId));
-
         let tableName = this.productTable["name"];
         let product = await getById(tableName, productId);
 
@@ -28,21 +26,28 @@ class ProductDao{
         return productObj;
     }
 
-    saveOrUpdateProduct(product){
+    saveOrUpdate(data){
 
-        let productArrayValues = getListValueFromJson(product);
+        Logger.log("saveOrUpdateProduct: " + JSON.stringify(product));
 
-        Logger.log("productArrayValues: " + JSON.stringify(productArrayValues));
+        // let productArrayValues = getListValueFromJson(product);
 
-        if(product.id === undefined || product.id === ""){
-            return createItem(this.productTable.name,
-                              productArrayValues,
-                              this.productTable.columns.length);
+        if(data[0] === undefined || data[0] === ""){
+            return createItem("product",
+                              product,
+                              6);
         }
 
-        return updateItem(this.productTable,
-                          productArrayValues,
-                          this.productTable.columns.length);
+        return updateItem("product",
+                          data,
+                          6);
     }
 
+}
+
+
+// todo tem q estar fora pois quem chama é o js da pagina, não tem acesso a classe
+function saveOrUpdateProduct(data){
+    let productDao = new ProductDao();
+    productDao.saveOrUpdate(data);
 }
