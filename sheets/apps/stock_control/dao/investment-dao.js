@@ -2,17 +2,8 @@
 class InvestmentDao{
 
     constructor() {
-        this.investmentTable = "investment";
-        this.investmentColumns = ["id",
-                                  "id_partner",
-                                  "id_product",
-                                  "value"];
-
+        this.investmentTable =  database.getTable("investment")
         this.partnerDao = new PartnerDao();
-    }
-
-    getIndex(column){
-        return this.investmentColumns.indexOf(column);
     }
 
     async getAllInvestment() {
@@ -21,21 +12,22 @@ class InvestmentDao{
 
     async getInvestmentByProductId(productId) {
 
-        let investmentList =  await getWhenColumnEqualValue(this.investmentTable,
-                                                            this.getIndex("id_product"),
+        let idProductIndex = this.investmentTable.getIndex("id_product");
+        let idPartnerIndex = this.investmentTable.getIndex("id_partner");
+
+        let investmentList =  await getWhenColumnEqualValue(this.investmentTable["name"],
+                                                            idProductIndex,
                                                             productId);
         let investmentDTOS = []
 
         const promises = investmentList.map( async (item) => {
 
-            let partnerId = item[this.getIndex("id_partner")];
+            let partnerId = item[idPartnerIndex];
             let partnerObj = await this.partnerDao.getPartnerById(partnerId);
             investmentDTOS.push(new InvestmentDTO(item, partnerObj));
         });
 
         await Promise.all(promises);
-
-        Logger.log("investmentDTOS " + JSON.stringify(investmentDTOS));
 
         return investmentDTOS;
     }
@@ -45,11 +37,11 @@ class InvestmentDao{
         if(item[0] === undefined || item[0] === ""){
             return createItem(this.investmentTable,
                               item,
-                              this.investmentColumns.length);
+                              this.investmentTable.columns.length);
         }
 
         return updateItem(this.investmentTable,
                           item,
-                          this.investmentColumns.length);
+                          this.investmentTable.columns.length);
     }
 }

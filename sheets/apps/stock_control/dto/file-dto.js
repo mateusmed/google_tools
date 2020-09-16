@@ -33,25 +33,39 @@ let product = {
                     "id": "",
                     "name": ""
                 }
+            },
+            {
+                "id": "",
+                "valor": "",
+                "partner":{
+                    "id": "",
+                    "name": ""
+                }
             }
         ]
     }
 
 
+class Partner {
+
+    constructor(partner) {
+        this.id = partner[0];
+        this.name = partner[1];
+    }
+}
 
 
 class ProductDTO {
 
     //todo recebendo objeto 'matriz'
-    constructor(product, investment) {
-        this.id = "";
-        this.name = "";
-        this.quantity = "";
-        this.purchaseUnitPrice  = "";
-        this.estimatedUnitSalePrice  = "";
-        this.description  = "";
-
-        this.investimentList = ""
+    constructor(product, investmentList) {
+        this.id = product[0];
+        this.name = product[1];
+        this.quantity = product[2];
+        this.purchaseUnitPrice  = product[3];
+        this.estimatedUnitSalePrice = product[4];
+        this.description  = product[5];
+        this.investiment = investmentList;
     }
 }
 
@@ -59,8 +73,12 @@ class ProductDTO {
 // add to another local
 class InvestmentDTO {
 
-    constructor(investment, partnerobj) {
-        this.investiment = investment;
-        this.partnerobj = partnerobj;
+    //pegar objeto com os dados da tabela
+
+    constructor(investment, partner) {
+        this.id = investment[0];
+        this.value = investment[3];
+        this.partner = new Partner(partner);
     }
+
 }

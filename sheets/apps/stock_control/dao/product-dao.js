@@ -2,30 +2,27 @@
 class ProductDao{
 
     constructor() {
-        this.productTable = "product";
-        this.productColumns =  ["id",
-            "name",
-            "quantity",
-            "purchase_unit_price",
-            "estimated_unit_sale_price" ,
-            "description"];
+        this.productTable = database.getTable("product")
         this.investmentDao = new InvestmentDao();
     }
 
-
     async getAllProducts() {
-        return getAll(this.productTable);
+        return getAll(this.productTable["name"]);
     }
 
     async getProductById(id) {
 
         Logger.log("getProductById" + JSON.stringify(id));
 
-        let product = await getById(this.productTable, id);
-        let investmentList = await this.investmentDao.getInvestmentByProductId(product[0]);
+        let product = await getById(this.productTable["name"], id);
 
-        Logger.log("investmentList" + JSON.stringify(investmentList));
+        let idIndex = this.productTable.getIndex("id");
 
+        let investmentList = await this.investmentDao.getInvestmentByProductId(product[idIndex]);
+
+        let productObj = new ProductDTO(product, investmentList);
+
+        Logger.log("productObj" + JSON.stringify(productObj));
 
         return product;
     }
@@ -33,10 +30,10 @@ class ProductDao{
     saveOrUpdateProduct(item){
 
         if(item[0] === undefined || item[0] === ""){
-            return createItem(this.productTable, item, this.productColumns.length);
+            return createItem(this.productTable, item, this.productTable.columns.length);
         }
 
-        return updateItem(this.productTable, item, this.productColumns.length);
+        return updateItem(this.productTable, item, this.productTable.columns.length);
     }
 
 }

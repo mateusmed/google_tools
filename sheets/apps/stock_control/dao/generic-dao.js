@@ -2,6 +2,45 @@
 const urlDatabase = "https://docs.google.com/spreadsheets/d/1i2NOiagih_MhBoxClr59Lmecux7HatknkZmTFb22YU8/edit#gid=0"
 
 
+const database = new class Database{
+
+    tables = { "product": ["id",
+                           "name",
+                           "quantity",
+                           "purchase_unit_price",
+                           "estimated_unit_sale_price" ,
+                           "description"],
+
+             "partner": ["id",
+                        "name"],
+
+             "investment": ["id",
+                           "id_partner",
+                           "id_product",
+                           "value"]
+            }
+
+
+    getTable(name){
+
+      if(this.tables[name] !== undefined){
+
+        return {
+          "name": name,
+          "columns": this.tables[name],
+
+          getIndex(columnName){
+            this.columns.indexOf(columnName);
+          }
+        }
+      }
+      //todo throw exception
+    }
+
+}
+
+
+
 async function getAll(from) {
 
   let ss = SpreadsheetApp.openByUrl(urlDatabase)
@@ -48,6 +87,9 @@ async function getById(from, id) {
   let ws = ss.getSheetByName(from);
 
   let list =  ws.getDataRange().getValues();
+
+  //todo pensar em pegar direto pelo index, vai ficar mais rapido;
+
   let find = list.filter((item) => {
                               return (item[0] == id);
                          })
@@ -55,7 +97,6 @@ async function getById(from, id) {
   if(find[0] === undefined){
       return [];
   }
-
   return find[0];
 }
 
