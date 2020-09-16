@@ -3,7 +3,9 @@ async function indexHtmlBuilded(){
   
   let indexPage = [];
 
-  let productService = new ProductDao();
+  let products = new ProductDao().getAllProducts();
+
+  Logger.log("Products: " + JSON.stringify(products));
 
   let headerList = ["Id",
                     "Nome",
@@ -15,7 +17,7 @@ async function indexHtmlBuilded(){
 
   indexPage.push(headerMenu());
   indexPage.push("<br/>");
-  indexPage.push(tableHtml(productService.getAllProducts(), headerList));
+  indexPage.push(tableHtml(products, headerList));
   
   return Promise.all(indexPage);
 }

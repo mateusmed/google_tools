@@ -13,4 +13,13 @@ function currentUrl(){
 }
 
 
+function getListValueFromJson(json){
 
+    let result = [];
+
+    for(let i in json){
+        result.push(json[i]);
+    }
+
+    return result;
+}

@@ -49,35 +49,40 @@ let product = {
 class Partner {
 
     constructor(partner) {
-        this.id = partner[0];
-        this.name = partner[1];
+
+        let partnerTable = database.getTable("partner");
+
+        this.id = partner[partnerTable.columns.indexOf("id")];
+        this.name = partner[partnerTable.columns.indexOf("name")];
     }
 }
 
 
 class ProductDTO {
 
-    //todo recebendo objeto 'matriz'
     constructor(product, investmentList) {
-        this.id = product[0];
-        this.name = product[1];
-        this.quantity = product[2];
-        this.purchaseUnitPrice  = product[3];
-        this.estimatedUnitSalePrice = product[4];
-        this.description  = product[5];
+
+        let productTable = database.getTable("product");
+
+        this.id = product[productTable.columns.indexOf("id")];
+        this.name = product[productTable.columns.indexOf("name")];
+        this.quantity = product[productTable.columns.indexOf("quantity")];
+        this.purchaseUnitPrice  = product[productTable.columns.indexOf("purchase_unit_price")];
+        this.estimatedUnitSalePrice = product[productTable.columns.indexOf("estimated_unit_sale_price")];
+        this.description  = product[productTable.columns.indexOf("description")];
         this.investiment = investmentList;
     }
 }
 
 
-// add to another local
 class InvestmentDTO {
 
-    //pegar objeto com os dados da tabela
-
     constructor(investment, partner) {
-        this.id = investment[0];
-        this.value = investment[3];
+
+        let investmentTable = database.getTable("investment");
+
+        this.id = investment[investmentTable.columns.indexOf("id")];
+        this.value = investment[investmentTable.columns.indexOf("value")];
         this.partner = new Partner(partner);
     }
 

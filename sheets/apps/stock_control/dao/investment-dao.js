@@ -12,8 +12,11 @@ class InvestmentDao{
 
     async getInvestmentByProductId(productId) {
 
-        let idProductIndex = this.investmentTable.getIndex("id_product");
-        let idPartnerIndex = this.investmentTable.getIndex("id_partner");
+        let idProductIndex = this.investmentTable.columns.indexOf("id_product");
+        let idPartnerIndex = this.investmentTable.columns.indexOf("id_partner");
+
+        Logger.log("idProductIndex " + JSON.stringify(idProductIndex));
+        Logger.log("idPartnerIndex " + JSON.stringify(idPartnerIndex));
 
         let investmentList =  await getWhenColumnEqualValue(this.investmentTable["name"],
                                                             idProductIndex,

@@ -13,13 +13,20 @@
     }
     
     function getDataForm(){
-    
-        return [$("#id").val(),
-                $("#name").val(),
-                $("#qtd").val(),
-                $("#ppuc").val(),
-                $("#ppuv").val(),
-                $("#description").val()];
+
+        let id = $("#id").val();
+        let name = $("#name").val();
+        let qtd = $("#qtd").val();
+        let ppuc = $("#ppuc").val();
+        let ppuv = $("#ppuv").val();
+        let description = $("#description").val();
+
+        return {"id": id,
+                "name": name,
+                "qtd":  qtd,
+                "ppuc": ppuc,
+                "ppuv": ppuv,
+                "description": description};
     }
     
     
@@ -44,8 +51,7 @@
 
         // validar informações REQUIRED
         let data = getDataForm();
-
-        alert(data);
+        alert(JSON.stringify(data));
 
         google.script.run.withSuccessHandler(renderMessageResponse("primary", "message")).saveOrUpdateProduct(data);
 

@@ -33,14 +33,12 @@ async function formProduct(product){
       ${await messageBox()}
     
       <div class="form-group-father">
-        ${await input("", "hidden", "id", product[0], "disabled")}
-        ${await input("Nome", "text", "name", product[1])}
-        ${await input("Quantidade", "number", "qtd", product[2])}
-        ${await input("Preço unidade compra", "number", "ppuc", product[3])}
-        ${await input("Preço unidade venda", "number", "ppuv", product[4])}        
-        ${await input("Descrição", "text", "description", product[5])}
-        
-        
+        ${await input("", "hidden", "id", product.id, "disabled")}
+        ${await input("Nome", "text", "name", product.name)}
+        ${await input("Quantidade", "number", "qtd", product.quantity)}
+        ${await input("Preço unidade compra", "number", "ppuc", product.purchaseUnitPrice)}
+        ${await input("Preço unidade venda", "number", "ppuv", product.estimatedUnitSalePrice)}        
+        ${await input("Descrição", "text", "description", product.description)}
         
         ${await button("save", "salvar")}
       </div>`
