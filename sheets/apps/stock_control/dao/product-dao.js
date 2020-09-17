@@ -26,21 +26,30 @@ class ProductDao{
         return productObj;
     }
 
-    saveOrUpdate(data){
+    async saveOrUpdate(data){
 
         Logger.log("saveOrUpdateProduct: " + JSON.stringify(product));
 
-        // let productArrayValues = getListValueFromJson(product);
+        let productArrayValues = [data.id,
+                                  data.name,
+                                  data.qtd,
+                                  data.ppuc,
+                                  data.ppuv,
+                                  data.description];
 
-        if(data[0] === undefined || data[0] === ""){
-            return createItem("product",
-                              product,
-                              6);
+
+        //todo não consigo fazer o código esperar
+        // let productArrayValues = await getListValueFromJson(data);
+
+        if(data.id === undefined || data.id === ""){
+            return createItem(this.productTable.name,
+                              productArrayValues,
+                              this.productTable.columns.length);
         }
 
-        return updateItem("product",
-                          data,
-                          6);
+        return updateItem(this.productTable.name,
+                          productArrayValues,
+                          this.productTable.columns.length);
     }
 
 }
@@ -48,6 +57,8 @@ class ProductDao{
 
 // todo tem q estar fora pois quem chama é o js da pagina, não tem acesso a classe
 function saveOrUpdateProduct(data){
+
+    //todo injetar todas as instancias ao mesmo tempo
     let productDao = new ProductDao();
     productDao.saveOrUpdate(data);
 }
