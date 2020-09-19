@@ -2,22 +2,21 @@
 class ProductDao{
 
     constructor() {
-        this.productTable = database.getTable("product")
-        this.investmentDao = new InvestmentDao();
+        this.productTable = database.getTable("product");
     }
 
     async getAllProducts() {
-        return getAll(this.productTable["name"]);
+        return genericDAO.getAll(this.productTable.name);
     }
 
     async getProductById(productId) {
 
-        let tableName = this.productTable["name"];
-        let product = await getById(tableName, productId);
+        let tableName = this.productTable.name;
+        let product = await genericDAO.getById(tableName, productId);
 
         //todo verificar se produto foi encontrado
 
-        let investmentList = await this.investmentDao.getInvestmentByProductId(productId);
+        let investmentList = await investmentDAO.getInvestmentByProductId(productId);
 
         let productObj = new ProductDTO(product, investmentList);
 
@@ -26,28 +25,28 @@ class ProductDao{
         return productObj;
     }
 
-    async saveOrUpdate(data){
+    async saveOrUpdate(product){
+
+        //todo ----> se vier em json a ordem dos dados pode vir alterados
+        //todo se tu realmente quisesse que eles viessem em ordem vc mandava uma lista
 
         Logger.log("saveOrUpdateProduct: " + JSON.stringify(product));
 
-        let productArrayValues = [data.id,
-                                  data.name,
-                                  data.qtd,
-                                  data.ppuc,
-                                  data.ppuv,
-                                  data.description];
+        let productArrayValues = [product.id,
+                                  product.name,
+                                  product.qtd,
+                                  product.ppuc,
+                                  product.ppuv,
+                                  product.description];
 
 
-        //todo não consigo fazer o código esperar
-        // let productArrayValues = await getListValueFromJson(data);
-
-        if(data.id === undefined || data.id === ""){
-            return createItem(this.productTable.name,
+        if(product.id === undefined || product.id === ""){
+            return genericDAO.createItem(this.productTable.name,
                               productArrayValues,
                               this.productTable.columns.length);
         }
 
-        return updateItem(this.productTable.name,
+        return genericDAO.updateItem(this.productTable.name,
                           productArrayValues,
                           this.productTable.columns.length);
     }
@@ -58,7 +57,7 @@ class ProductDao{
 // todo tem q estar fora pois quem chama é o js da pagina, não tem acesso a classe
 function saveOrUpdateProduct(data){
 
-    //todo injetar todas as instancias ao mesmo tempo
-    let productDao = new ProductDao();
-    productDao.saveOrUpdate(data);
+    productDAO.saveOrUpdate(data);
 }
+
+const productDAO = new ProductDao();

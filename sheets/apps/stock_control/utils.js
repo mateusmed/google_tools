@@ -13,17 +13,3 @@ function currentUrl(){
 }
 
 
-async function getListValueFromJson(json){
-
-    let result = [];
-
-    let promises = json.forEach((item) => {
-        return new Promise((resolve, reject) =>{
-            result.push(item);
-        })
-    })
-
-    await Promise.all(promises);
-
-    return result;
-}

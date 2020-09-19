@@ -3,7 +3,7 @@ async function indexHtmlBuilded(){
   
   let indexPage = [];
 
-  let products = new ProductDao().getAllProducts();
+  let products = await productDAO.getAllProducts();
 
   let headerList = ["Id",
                     "Nome",

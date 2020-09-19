@@ -2,16 +2,17 @@
 
 class PartnerDao{
     constructor() {
-        this.partnerTable = "partner";
-        this.partnerColumns = ["id", "name"];
+        this.partnerTable = database.getTable("partner")
     }
 
     async getAllPartner() {
-        return getAll(this.partnerTable);
+        return genericDAO.getAll(this.partnerTable.name);
     }
 
     async getPartnerById(id) {
-        return getById(this.partnerTable, id);
+        return genericDAO.getById(this.partnerTable, id);
     }
 
 }
+
+const partnerDao = new PartnerDao();
