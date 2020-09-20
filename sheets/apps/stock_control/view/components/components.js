@@ -4,28 +4,6 @@ async function messageBox(){
 }
 
 async function input(label, type, id, value, disabled){
-  
-  if(disabled === undefined){
-     disabled = ""
-  }
-
-  if(value === undefined){
-      value = "";
-  }
-
-  return `<div class="form-group">
-               <label for="${id}"> ${label}</label>
-               <input type="${type}"
-                      id="${id}" 
-                      value="${value}" 
-                      class="form-control" 
-                      aria-describedby="emailHelp" 
-                      ${disabled}>
-           </div>`
-}
-
-
-async function newTempInput(label, type, id, value, disabled){
 
     if(disabled === undefined){
         disabled = ""

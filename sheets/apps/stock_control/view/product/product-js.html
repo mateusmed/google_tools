@@ -22,15 +22,15 @@
         let description = $("#description").val();
 
         //todo pegar investment data
-        let investmentsForm = $('div[id^="investment_"]').length;
+        let investmentsForm = $('div[id^="investment_"]');
         let investmentsList = [];
 
-        for (let i = 1; i <= investmentsForm.length; i++ ){
+        for (let i = 0; i < investmentsForm.length; i++ ){
 
             investmentsList.push({
-
-                "partner_id": $(`#investment_{${i} #`).val(),
-                "value": investmentsForm[i].value
+                "investment_id": investmentsForm[i].id.replace("investment_", ""),
+                "partner_id": investmentsForm[i].children.partner_id.value,
+                "value": investmentsForm[i].children.value.value
             })
         }
 

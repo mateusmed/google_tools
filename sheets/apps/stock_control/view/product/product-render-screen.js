@@ -58,14 +58,11 @@ async function formProduct(product, partnerList){
       investmentFind["value"] = investmentFind[0].value;
     }
 
-
-    //todo
-
     form.push(
         `
         <div id="investment_${investmentFind.investment_id}">
-          ${await newTempInput("", "hidden", `partner_id`, `${partner.id}`, "disabled")}
-          ${await newTempInput(partner.name, "number", `value`, investmentFind.value)}
+          ${await input("", "hidden", `partner_id`, `${partner.id}`, "disabled")}
+          ${await input(partner.name, "number", `value`, investmentFind.value)}
         </div>
         `);
   }
