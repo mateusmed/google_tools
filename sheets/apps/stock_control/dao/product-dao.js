@@ -6,8 +6,16 @@ class ProductDao{
     }
 
     async getAllProducts() {
-        //todo retornar o objeto
-        return genericDAO.getAll(this.productTable.name);
+
+        let productList = await genericDAO.getAll(this.productTable.name);
+
+        let productListReturn = []
+
+        for(let product of productList){
+            await productListReturn.push(new ProductTableDTO(product))
+        }
+
+        return productListReturn;
     }
 
     async getProductById(productId) {

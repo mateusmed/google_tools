@@ -7,12 +7,12 @@ function doGet(event) {
 
   switch(path) {
     case "product":
-      return productPage(event)
+      return productPage(event);
 
-    // case "new-product":
-    //   return newProductPage()
+    case "sale":
+      return salePage(event);
 
-    // case "sale":
+    // case "sales":
     //   return newProductPage()
 
     default:
@@ -37,6 +37,18 @@ function productPage(event){
   return productPage.evaluate();
 }
 
+function salePage(event){
+  let salePage = getPage("view/sale/sale");
+
+  if(event.parameters["productId"] === undefined){
+    salePage["productId"] = "null";
+  }else{
+    salePage["productId"] = event.parameters["productId"];
+    salePage["productName"] = event.parameters["productName"];
+  }
+
+  return salePage.evaluate();
+}
 
 
 

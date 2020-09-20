@@ -60,7 +60,7 @@ async function headerMenu(page){
                <a class="nav-link" href="${product}">Novo Produto </a>
            </li>
           <li class="nav-item {sale}">
-             <a class="nav-link" href="${sale}"> Venda </a>
+             <a class="nav-link" href="${sale}"> Vendas </a>
           </li>
           <li class="nav-item {statistic}">
              <a class="nav-link" href="${statistics}">Estatistica</a>
@@ -99,23 +99,31 @@ async function tableHtml(itemList, headerList){
           </thead> 
         <tbody>`);
 
-  
-   for(let i = 0; i < itemMatriz.length; i++){
+
+   for(let item of itemList){
       
-      let destiny = currentUrl() + "/product?id="+ itemMatriz[i][0];
+      let editDestiny = currentUrl() + "/product?id="+ item.id;
+      let saleDestiny = currentUrl() + "/sale?productId="+ item.id;
      
       table.push(
       `<tr>
-           <td> ${itemMatriz[i][0]} </td> 
-           <td> ${itemMatriz[i][1]} </td>
-           <td> ${itemMatriz[i][2]} </td>
-           <td> ${itemMatriz[i][3]} </td>
-           <td> ${itemMatriz[i][4]} </td> 
-           <td> ${itemMatriz[i][5]} </td>
+           <td> ${item.id} </td> 
+           <td> ${item.name} </td>
+           <td> ${item.quantity} </td>
+           <td> ${item.purchaseUnitPrice} </td>
+           <td> ${item.estimatedUnitSalePrice} </td> 
+           <td> ${item.description} </td>
            <td> 
-                <a class="btn btn-outline-primary" href="${destiny}" role="button">
-                   Edit
+           
+           <div class="btn-group">
+                <a class="btn btn-outline-primary" href="${editDestiny}" role="button">
+                   Editar
                 </a>
+                <a class="btn btn-outline-primary" href="${saleDestiny}" role="button">
+                   Vendemos
+                </a>
+            </div>
+            
            </td> 
        </tr> `
       );

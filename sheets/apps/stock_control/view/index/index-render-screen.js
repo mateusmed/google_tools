@@ -2,8 +2,10 @@
 async function indexHtmlBuilded(){
   
   let indexPage = [];
-  //todo retornar o objeto
+
   let products = await productDAO.getAllProducts();
+
+  //todo adicionar data de criação e data da ultima atualização
 
   let headerList = ["Id",
                     "Nome",

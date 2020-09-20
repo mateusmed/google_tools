@@ -75,6 +75,22 @@ class ProductDTO {
 }
 
 
+class ProductTableDTO {
+
+    constructor(product) {
+
+        let productTable = database.getTable("product");
+
+        this.id = product[productTable.columns.indexOf("id")];
+        this.name = product[productTable.columns.indexOf("name")];
+        this.quantity = product[productTable.columns.indexOf("quantity")];
+        this.purchaseUnitPrice  = product[productTable.columns.indexOf("purchase_unit_price")];
+        this.estimatedUnitSalePrice = product[productTable.columns.indexOf("estimated_unit_sale_price")];
+        this.description  = product[productTable.columns.indexOf("description")];
+    }
+}
+
+
 class InvestmentDTO {
 
     constructor(investment, partner) {
