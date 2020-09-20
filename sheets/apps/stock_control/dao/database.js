@@ -5,19 +5,19 @@ class Database {
         this.urlDatabase = "https://docs.google.com/spreadsheets/d/1i2NOiagih_MhBoxClr59Lmecux7HatknkZmTFb22YU8/edit#gid=0"
         this.tables = {
             "product": ["id",
-                "name",
-                "quantity",
-                "purchase_unit_price",
-                "estimated_unit_sale_price",
-                "description"],
+                        "name",
+                        "quantity",
+                        "purchase_unit_price",
+                        "estimated_unit_sale_price",
+                        "description"],
 
             "partner": ["id",
-                "name"],
+                        "name"],
 
             "investment": ["id",
-                "id_partner",
-                "id_product",
-                "value"]
+                            "id_partner",
+                            "id_product",
+                            "value"]
         }
     }
 

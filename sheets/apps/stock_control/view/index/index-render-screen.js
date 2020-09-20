@@ -2,7 +2,7 @@
 async function indexHtmlBuilded(){
   
   let indexPage = [];
-
+  //todo retornar o objeto
   let products = await productDAO.getAllProducts();
 
   let headerList = ["Id",

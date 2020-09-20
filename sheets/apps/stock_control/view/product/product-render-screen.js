@@ -5,14 +5,13 @@ async function productHtmlBuilded(productId){
 
   let partnerList = await partnerDao.getAllPartner();
 
-  Logger.log("event" + JSON.stringify(partnerList));
+  Logger.log("partnerList " + JSON.stringify(partnerList));
 
   if(productId === undefined || productId === "undefined"){
     productPage.push(headerMenu());
     productPage.push(formProduct(undefined, partnerList));
     return Promise.all(productPage);
   }
-
 
   let product = await productDAO.getProductById(productId);
 
@@ -23,15 +22,16 @@ async function productHtmlBuilded(productId){
   return Promise.all(productPage);
 }
 
-//todo colocar o formulario de investimento
+
 async function formProduct(product, partnerList){
 
-  //todo pensar em uma maneira mais inteligente
-  //todo isso aqui acontece quando é a criação de um novo produto
+  let form = [];
 
-  return `<div class="container">
+  form.push(`<div class="container">
     
       ${await messageBox()}
+
+      <h4>Produto:</h4>  
     
       <div class="form-group-father">
         ${await input("", "hidden", "id", product.id, "disabled")}
@@ -39,12 +39,32 @@ async function formProduct(product, partnerList){
         ${await input("Quantidade", "number", "qtd", product.quantity)}
         ${await input("Preço unidade compra", "number", "ppuc", product.purchaseUnitPrice)}
         ${await input("Preço unidade venda", "number", "ppuv", product.estimatedUnitSalePrice)}        
-        ${await input("Descrição", "text", "description", product.description)}
-        
-        
-        ${await input("Descrição", "text", "description", JSON.stringify(partnerList))}
-        
-        
+        ${await input("Descrição", "text", "description", product.description)}    
+        `);
+
+  form.push("<br>");
+  form.push("<h4>Investidores:</h4>");
+
+  for(let partner of partnerList){
+
+    let investmentFind = "";
+
+    investmentFind = product.investiment.filter((item) => {
+      return item.partner.name === partner.name;
+    })
+
+    if(investmentFind[0] !== undefined){
+      investmentFind = investmentFind[0].value;
+    }
+
+    form.push(`${await input(partner.name, "text", `partner_${partner.id}`, investmentFind)}`)
+  }
+
+
+  form.push(`      
         ${await button("save", "salvar")}
-      </div>`
+      </div>`)
+
+
+  return form.join("");
 }

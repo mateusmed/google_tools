@@ -53,7 +53,7 @@ class GenericDao {
         if(find[0] === undefined){
             return [];
         }
-        return find[0];
+        return find[0]; 
     }
 
 

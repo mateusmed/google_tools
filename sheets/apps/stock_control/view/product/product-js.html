@@ -21,22 +21,27 @@
         let ppuv = $("#ppuv").val();
         let description = $("#description").val();
 
-        return {"id": id,
-                "name": name,
-                "qtd":  qtd,
-                "ppuc": ppuc,
-                "ppuv": ppuv,
-                "description": description};
+        let investmentsForm = $('input[id^="partner_"]');
+        let investmentsList = [];
+
+        for (let i = 0; i < investmentsForm.length; i++ ){
+
+            investmentsList.push({
+                "partner_id": investmentsForm[i].id.replace("partner_", ""),
+                "value": investmentsForm[i].value
+            })
+        }
+
+        return {
+            "id": id,
+            "name": name,
+            "qtd": qtd,
+            "ppuc": ppuc,
+            "ppuv": ppuv,
+            "description": description,
+            "investment": investmentsList
+        }
     }
-    // function getDataForm(){
-    //
-    //    return [$("#id").val(),
-    //            $("#name").val(),
-    //            $("#qtd").val(),
-    //            $("#ppuc").val(),
-    //            $("#ppuv").val(),
-    //            $("#description").val()];
-    // }
     
     function renderMessageResponse(typeAlert, message){
     
@@ -57,13 +62,13 @@
 
         cleanMessageBox()
 
-        // validar informações REQUIRED
+        //todo validar informações REQUIRED
         let data = getDataForm();
         alert(JSON.stringify(data));
 
         google.script.run.withSuccessHandler(renderMessageResponse("primary", "message")).saveOrUpdateProduct(data);
 
-     }   
+     }
 
     
 </script>

@@ -46,7 +46,7 @@ let product = {
     }
 
 
-class Partner {
+class PartnerDTO {
 
     constructor(partner) {
 
@@ -83,7 +83,7 @@ class InvestmentDTO {
 
         this.id = investment[investmentTable.columns.indexOf("id")];
         this.value = investment[investmentTable.columns.indexOf("value")];
-        this.partner = new Partner(partner);
+        this.partner = new PartnerDTO(partner);
     }
 
 }

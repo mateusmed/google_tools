@@ -6,6 +6,7 @@ class ProductDao{
     }
 
     async getAllProducts() {
+        //todo retornar o objeto
         return genericDAO.getAll(this.productTable.name);
     }
 
