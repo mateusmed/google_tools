@@ -24,6 +24,30 @@ async function input(label, type, id, value, disabled){
            </div>`
 }
 
+
+async function newTempInput(label, type, id, value, disabled){
+
+    if(disabled === undefined){
+        disabled = ""
+    }
+
+    if(value === undefined){
+        value = "";
+    }
+
+    return `
+            <label for="${id}"> ${label}</label>
+               <input type="${type}"
+                      id="${id}" 
+                      value="${value}" 
+                      class="form-control" 
+                      aria-describedby="emailHelp" 
+                      ${disabled}>
+           `
+}
+
+
+
 async function button(id, label){
   return `<button id="${id}" class="btn btn-primary">${label}</button>`
 }

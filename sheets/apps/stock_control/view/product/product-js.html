@@ -21,13 +21,15 @@
         let ppuv = $("#ppuv").val();
         let description = $("#description").val();
 
-        let investmentsForm = $('input[id^="partner_"]');
+        //todo pegar investment data
+        let investmentsForm = $('div[id^="investment_"]').length;
         let investmentsList = [];
 
-        for (let i = 0; i < investmentsForm.length; i++ ){
+        for (let i = 1; i <= investmentsForm.length; i++ ){
 
             investmentsList.push({
-                "partner_id": investmentsForm[i].id.replace("partner_", ""),
+
+                "partner_id": $(`#investment_{${i} #`).val(),
                 "value": investmentsForm[i].value
             })
         }

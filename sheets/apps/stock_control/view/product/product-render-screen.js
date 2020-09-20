@@ -47,24 +47,32 @@ async function formProduct(product, partnerList){
 
   for(let partner of partnerList){
 
-    let investmentFind = "";
+    let investmentFind = {};
 
     investmentFind = product.investiment.filter((item) => {
       return item.partner.name === partner.name;
     })
 
     if(investmentFind[0] !== undefined){
-      investmentFind = investmentFind[0].value;
+      investmentFind["investment_id"] = investmentFind[0].id;
+      investmentFind["value"] = investmentFind[0].value;
     }
 
-    form.push(`${await input(partner.name, "text", `partner_${partner.id}`, investmentFind)}`)
+
+    //todo
+
+    form.push(
+        `
+        <div id="investment_${investmentFind.investment_id}">
+          ${await newTempInput("", "hidden", `partner_id`, `${partner.id}`, "disabled")}
+          ${await newTempInput(partner.name, "number", `value`, investmentFind.value)}
+        </div>
+        `);
   }
 
-
-  form.push(`      
+  form.push(`
         ${await button("save", "salvar")}
       </div>`)
-
 
   return form.join("");
 }
