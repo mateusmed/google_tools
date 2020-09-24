@@ -2,7 +2,7 @@
 <script>
 
     $(function() {
-        google.script.run.withSuccessHandler(renderSalePage).saleHtmlBuilded(productId);
+        google.script.run.withSuccessHandler(renderSalePage).saleHtmlBuilded(productId, productName);
     });
 
     function renderSalePage(html) {

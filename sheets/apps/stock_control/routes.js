@@ -43,11 +43,14 @@ function productPage(event){
 function salePage(event){
   let salePage = getPage("view/sale/sale");
 
+  Logger.log("productName" + JSON.stringify(event.parameters["productName"]));
+
   if(event.parameters["productId"] === undefined){
-    salePage["productId"] = "null";
+    salePage["productId"] = "undefined";
+    salePage["productName"] = "null";
   }else{
     salePage["productId"] = event.parameters["productId"];
-    // salePage["productName"] = event.parameters["productName"];
+    salePage["productName"] = event.parameters["productName"];
   }
 
   return salePage.evaluate();

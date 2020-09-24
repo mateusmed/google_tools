@@ -1,5 +1,5 @@
 
-async function saleHtmlBuilded(productId){
+async function saleHtmlBuilded(productId, productName){
 
     let salePage = [];
 
@@ -19,35 +19,39 @@ async function saleHtmlBuilded(productId){
         return Promise.all(salePage);
     }
 
-    let product = await productDAO.getProductById(productId);
-
     Logger.log("Sale product: ", JSON.stringify(product));
 
     salePage.push(headerMenu());
     salePage.push("<br/>");
-    salePage.push(formSale(product));
+    salePage.push(formSale(productId, productName));
 
     return Promise.all(salePage);
 }
 
 
 
-async function formSale(product){
+async function formSale(productId, productName){
+
+    Logger.log("form sale, ", productId, productName);
 
     let form = [];
-
-    //todo montar o form corretamente
 
     form.push(`<div class="container">
     
       ${await messageBox()}
 
-      <h4>Venda:</h4>  
-    
+      <h4>Venda</h4>
+      <br/>
+      
+      <h4>${productName}</h4>
+      <br/>
+      
       <div class="form-group-father">
-
-        <span>sales page with product id ${product.id}</span>
-            
+         ${await input("", "hidden", "id", productId, "disabled")}
+         ${await input("Preço", "number", "preco", "")}
+         ${await input("Quantidade", "number", "qtd", "")}
+         <br/>   
+         ${await button("save", "Vendido")}
       </div>`);
 
     form.push(`</div>`);

@@ -103,7 +103,7 @@ async function tableHtml(itemList, headerList){
    for(let item of itemList){
       
       let editDestiny = currentUrl() + "/product?id="+ item.id;
-      let saleDestiny = currentUrl() + "/sale?productId="+ item.id;
+      let saleDestiny = currentUrl() + `/sale?productId=${item.id}&productName=${item.name}`;
      
       table.push(
       `<tr>
