@@ -12,7 +12,7 @@ function doGet(event) {
     case "sale":
       return salePage(event);
 
-    case "statistics":
+    case "statistic":
       return statisticPage(event);
 
     case "consultation":
