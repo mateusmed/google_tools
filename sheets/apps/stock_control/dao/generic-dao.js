@@ -19,7 +19,6 @@ class GenericDao {
             return (item[columnId] == value);
         })
 
-        Logger.log("find " + JSON.stringify(find));
         return find;
     }
 
@@ -37,7 +36,7 @@ class GenericDao {
     }
 
 
-
+    //todo atenção está pegando pelo id mas esta salvando e criando pelo index
     async getById(from, id) {
         let ss = SpreadsheetApp.openByUrl(database.urlDatabase);
         let ws = ss.getSheetByName(from);
@@ -57,9 +56,14 @@ class GenericDao {
     }
 
 
-    createItem(from, item, numColumns){
+    //row  - linha inicial,
+    //column -  coluna inicial,
+    //numRows -  numero de linhas a partir da "row" escolhida,
+    //numColumns -  numero de colunas a partir da "column" escolhida,
+    //ws.getRange(row, column, numRows, numColumns)
+    async createItem(from, item, numColumns){
 
-        Logger.log("======> create item");
+        Logger.log(`======> create item from [${JSON.stringify(from)}] item [${JSON.stringify(item)}] numColumns [${numColumns}]`);
 
         let ss = SpreadsheetApp.openByUrl(database.urlDatabase);
         let ws = ss.getSheetByName(from);
@@ -70,15 +74,12 @@ class GenericDao {
 
         ws.getRange(id, 1, 1, numColumns).setValues([item]);
 
-        return true;
+        Logger.log(`======> rangeSaved`);
     }
 
+    async updateItem(from, item, numColumns){
 
-
-
-    updateItem(from, item, numColumns){
-
-        Logger.log("item " + item);
+        Logger.log(`======> update item from [${JSON.stringify(from)}] item [${JSON.stringify(item)}] numColumns [${numColumns}]`);
 
         let ss = SpreadsheetApp.openByUrl(database.urlDatabase);
         let ws = ss.getSheetByName(from);
@@ -86,16 +87,11 @@ class GenericDao {
         let id = item[0];
         item.splice(0, 1);
 
-        //row  - linha inicial,
-        //column -  coluna inicial,
-        //numRows -  numero de linhas a partir da "row" escolhida,
-        //numColumns -  numero de colunas a partir da "column" escolhida,
-        //ws.getRange(row, column, numRows, numColumns)
         numColumns = numColumns - 1;
 
         ws.getRange(id, 2, 1, numColumns).setValues([item]);
 
-        return true;
+        Logger.log(`======> rangeSaved`);
     }
 }
 

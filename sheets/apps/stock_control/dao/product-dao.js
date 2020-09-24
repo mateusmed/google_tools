@@ -5,33 +5,18 @@ class ProductDao{
         this.productTable = database.getTable("product");
     }
 
-    async getAllProducts() {
-
-        let productList = await genericDAO.getAll(this.productTable.name);
-
-        let productListReturn = []
-
-        for(let product of productList){
-            await productListReturn.push(new ProductTableDTO(product))
-        }
-
-        return productListReturn;
-    }
-
-    async getProductById(productId) {
+    async getAll() {
 
         let tableName = this.productTable.name;
-        let product = await genericDAO.getById(tableName, productId);
+        return await genericDAO.getAll(tableName);
+    }
 
-        //todo verificar se produto foi encontrado
+    async getById(productId) {
 
-        let investmentList = await investmentDAO.getInvestmentByProductId(productId);
+        Logger.log("[productDao - getProductById]");
 
-        let productObj = new ProductDTO(product, investmentList);
-
-        Logger.log("Return productObj: " + JSON.stringify(productObj));
-
-        return productObj;
+        let tableName = this.productTable.name;
+        return await genericDAO.getById(tableName, productId);
     }
 
     async saveOrUpdate(product){
@@ -39,7 +24,6 @@ class ProductDao{
         //todo ----> se vier em json a ordem dos dados pode vir alterados
         //todo se tu realmente quisesse que eles viessem em ordem vc mandava uma lista
 
-        Logger.log("saveOrUpdateProduct: " + JSON.stringify(product));
 
         let productArrayValues = [product.id,
                                   product.name,
@@ -51,22 +35,15 @@ class ProductDao{
 
         if(product.id === undefined || product.id === ""){
             return genericDAO.createItem(this.productTable.name,
-                              productArrayValues,
-                              this.productTable.columns.length);
+                                         productArrayValues,
+                                         this.productTable.columns.length);
         }
 
         return genericDAO.updateItem(this.productTable.name,
-                          productArrayValues,
-                          this.productTable.columns.length);
+                                     productArrayValues,
+                                     this.productTable.columns.length);
     }
 
-}
-
-
-// todo tem q estar fora pois quem chama é o js da pagina, não tem acesso a classe
-function saveOrUpdateProduct(data){
-
-    productDAO.saveOrUpdate(data);
 }
 
 const productDAO = new ProductDao();

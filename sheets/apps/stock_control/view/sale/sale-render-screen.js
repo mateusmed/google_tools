@@ -52,9 +52,9 @@ async function formSale(productId, productName){
       <h4>${productName}</h4>
       <br/>
       
-      <div class="form-group-father">
-         ${await input("", "hidden", "id", productId, "disabled")}
-         ${await input("Preço unidade", "number", "preco", "")}
+      <div class="form-group-father">         
+         ${await input("", "hidden", "productId", productId, "disabled")}
+         ${await input("Preço unidade", "number", "price", "")}
          ${await input("Quantidade", "number", "qtd", 1)}
          <br/>   
          ${await button("save", "Vendido")}

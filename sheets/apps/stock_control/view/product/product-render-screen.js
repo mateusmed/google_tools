@@ -13,7 +13,7 @@ async function productHtmlBuilded(productId){
     return Promise.all(productPage);
   }
 
-  let product = await productDAO.getProductById(productId);
+  let product = await productService.getProductById(productId);
 
   productPage.push(headerMenu());
   productPage.push("<br/>");
@@ -68,6 +68,7 @@ async function formProduct(product, partnerList){
   }
 
   form.push(`
+        <br/>
         ${await button("save", "salvar")}
       </div>`)
 

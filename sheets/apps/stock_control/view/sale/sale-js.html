@@ -14,6 +14,31 @@
             $('#dtBasicExample').DataTable();
             $('.dataTables_length').addClass('bs-select');
         });
+        document.getElementById("save").addEventListener("click", save);
+    }
+
+    function getDataForm(){
+
+        let productId = $("#productId").val();
+        let name = $("#price").val();
+        let qtd = $("#qtd").val();
+
+        return {
+            "productId": productId,
+            "name": name,
+            "qtd": qtd
+        }
+    }
+
+    function save(){
+
+        cleanMessageBox()
+
+        let data = getDataForm();
+        alert(JSON.stringify(data));
+
+        google.script.run.withSuccessHandler(renderMessageResponse("primary", "message")).saveOrUpdateProduct(data);
+
     }
 
 </script>

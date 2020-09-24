@@ -6,7 +6,9 @@ class InvestmentDao{
     }
 
     async getAllInvestment() {
-        return genericDAO.getAll(this.investmentTable.name);
+
+        let tableName = this.investmentTable.name;
+        return genericDAO.getAll(tableName);
     }
 
     async getInvestmentByProductId(productId) {
@@ -31,15 +33,20 @@ class InvestmentDao{
         return investmentDTOS;
     }
 
-    saveOrUpdateInvestment(item){
+    async saveOrUpdate(item){
 
-        if(item[0] === undefined || item[0] === ""){
-            return genericDAO.createItem(this.investmentTable,
+        if(item[0] === undefined ||  item[0] === "undefined" ||  item[0] === ""){
+
+            Logger.log(`[investmentDao] investment to update ${item}`);
+
+            return genericDAO.createItem(this.investmentTable.name,
                                          item,
                                          this.investmentTable.columns.length);
         }
 
-        return genericDAO.updateItem(this.investmentTable,
+        Logger.log(`[investmentDao] investment to update ${item}`);
+
+        return genericDAO.updateItem(this.investmentTable.name,
                                      item,
                                      this.investmentTable.columns.length);
     }

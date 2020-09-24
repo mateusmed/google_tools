@@ -15,9 +15,9 @@ class Database {
                         "name"],
 
             "investment": ["id",
-                            "id_partner",
-                            "id_product",
-                            "value"]
+                           "id_partner",
+                           "id_product",
+                           "value"]
         }
     }
 
