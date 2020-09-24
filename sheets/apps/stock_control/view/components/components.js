@@ -75,13 +75,18 @@ async function headerMenu(page){
     return headerMenuList.replace(`{${page}}`, "active")
 }
 
-//todo tornar o mais generico possível
-async function tableHtml(itemList, headerList){
+
+async function tableProduct(itemList, headerList){
 
    let itemMatriz = await itemList;
   
    let table = [];
-  
+
+    //se itens for vazio montar uma resposta legal.
+    if(itemList.length === 0){
+
+    }
+
    table.push(
        `<div class="table-responsive">
        <table id="dtBasicExample" 
@@ -140,3 +145,60 @@ async function tableHtml(itemList, headerList){
 
 
 
+async function tableSale(itemList, headerList){
+
+    // let itemMatriz = await itemList;
+
+    let table = [];
+
+    //se itens for vazio montar uma resposta legal.
+    if(itemList.length === 0){
+
+    }
+
+    table.push(
+        `<div class="table-responsive">
+          <table id="dtBasicExample" 
+           class="table table-striped table-bordered table-sm" 
+           cellspacing="0" 
+           width="50%"> 
+          <thead> 
+            <tr>`);
+
+    headerList.map((item) => {
+        table.push(`<th class="th-sm"> ${item} </th>`);
+    });
+
+    table.push( `</tr> 
+          </thead> 
+        <tbody>`);
+
+
+    for(let item of itemList){
+
+        let editDestiny = currentUrl() + "/sale?id="+ item.id;
+
+        table.push(
+            `<tr>
+           <td> ${item.id} </td> 
+           <td> ${item.name} </td>
+           <td> 
+           
+           <div class="btn-group">
+                <a class="btn btn-outline-primary" href="${editDestiny}" role="button">
+                   Editar
+                </a>
+           </div>
+            
+           </td> 
+       </tr> `
+        );
+    }
+
+    table.push( ` </tr> 
+                  </tbody> 
+                  </table>
+                  </div>`);
+
+    return table.join("");
+}

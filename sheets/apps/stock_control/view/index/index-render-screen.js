@@ -17,7 +17,7 @@ async function indexHtmlBuilded(){
 
   indexPage.push(headerMenu());
   indexPage.push("<br/>");
-  indexPage.push(tableHtml(products, headerList));
+  indexPage.push(tableProduct(products, headerList));
   
   return Promise.all(indexPage);
 }

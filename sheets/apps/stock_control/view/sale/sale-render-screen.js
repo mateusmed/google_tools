@@ -13,9 +13,15 @@ async function saleHtmlBuilded(productId, productName){
 
     //todo pegar todas as vendas
 
+    let itemListTest = [
+        {"id": "1", "name": "nome"},
+        {"id": "2", "name": "nome2"}
+    ]
+
     if(productId === undefined || productId === "undefined"){
         salePage.push(headerMenu());
-        salePage.push(`<span>sales list</span>`);
+        salePage.push("<br/>");
+        salePage.push(tableSale(itemListTest, ["id", "nome", "action"]));
         return Promise.all(salePage);
     }
 
@@ -48,8 +54,8 @@ async function formSale(productId, productName){
       
       <div class="form-group-father">
          ${await input("", "hidden", "id", productId, "disabled")}
-         ${await input("Preço", "number", "preco", "")}
-         ${await input("Quantidade", "number", "qtd", "")}
+         ${await input("Preço unidade", "number", "preco", "")}
+         ${await input("Quantidade", "number", "qtd", 1)}
          <br/>   
          ${await button("save", "Vendido")}
       </div>`);

@@ -9,68 +9,12 @@
 
         var salePage = $('#sale');
         salePage.html(html);
-    }
-    //
-    // function getDataForm(){
-    //
-    //     let id = $("#id").val();
-    //     let name = $("#name").val();
-    //     let qtd = $("#qtd").val();
-    //     let ppuc = $("#ppuc").val();
-    //     let ppuv = $("#ppuv").val();
-    //     let description = $("#description").val();
-    //
-    //     //todo pegar investment data
-    //     let investmentsForm = $('div[id^="investment_"]');
-    //     let investmentsList = [];
-    //
-    //     for (let i = 0; i < investmentsForm.length; i++ ){
-    //
-    //         investmentsList.push({
-    //             "investment_id": investmentsForm[i].id.replace("investment_", ""),
-    //             "partner_id": investmentsForm[i].children.partner_id.value,
-    //             "value": investmentsForm[i].children.value.value
-    //         })
-    //     }
-    //
-    //     return {
-    //         "id": id,
-    //         "name": name,
-    //         "qtd": qtd,
-    //         "ppuc": ppuc,
-    //         "ppuv": ppuv,
-    //         "description": description,
-    //         "investment": investmentsList
-    //     }
-    // }
-    //
-    // function renderMessageResponse(typeAlert, message){
-    //
-    //     let msg = `<div class="alert alert-${typeAlert}" role="alert">
-    //                   ${message}
-    //               </div>`
-    //
-    //     let content = $('#message-box');
-    //     content.html(msg);
-    // }
-    //
-    // function cleanMessageBox(){
-    //     var message = $('#message-box');
-    //     message.html("");
-    // }
-    //
-    // function save(){
-    //
-    //     cleanMessageBox()
-    //
-    //     //todo validar informações REQUIRED
-    //     let data = getDataForm();
-    //     alert(JSON.stringify(data));
-    //
-    //     google.script.run.withSuccessHandler(renderMessageResponse("primary", "message")).saveOrUpdateProduct(data);
-    //
-    // }
 
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    }
 
 </script>
 
