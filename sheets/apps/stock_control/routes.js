@@ -12,8 +12,11 @@ function doGet(event) {
     case "sale":
       return salePage(event);
 
-    // case "sales":
-    //   return newProductPage()
+    case "statistics":
+      return statisticPage(event);
+
+    case "consultation":
+      return consultationPage(event);
 
     default:
        return indexPage();
@@ -44,12 +47,23 @@ function salePage(event){
     salePage["productId"] = "null";
   }else{
     salePage["productId"] = event.parameters["productId"];
-    salePage["productName"] = event.parameters["productName"];
+    // salePage["productName"] = event.parameters["productName"];
   }
 
   return salePage.evaluate();
 }
 
+
+function statisticPage(event){
+  let statisticPage = getPage("view/statistic/statistic");
+  return statisticPage.evaluate();
+}
+
+
+function consultationPage(event){
+  let consultationPage = getPage("view/consultation/consultation");
+  return consultationPage.evaluate();
+}
 
 
 //https://www.labnol.org/code/19871-get-post-requests-google-script

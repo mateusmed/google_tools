@@ -1,0 +1,16 @@
+
+<script>
+
+    $(function() {
+        google.script.run.withSuccessHandler(renderStatisticPage).statisticHtmlBuilded();
+    });
+
+    function renderStatisticPage(html) {
+
+        var statisticPage = $('#statistic');
+        statisticPage.html(html);
+    }
+
+</script>
+
+

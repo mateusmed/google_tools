@@ -1,0 +1,16 @@
+
+<script>
+
+    $(function() {
+        google.script.run.withSuccessHandler(renderConsultationPage).consultationHtmlBuilded();
+    });
+
+    function renderConsultationPage(html) {
+
+        var consultationPage = $('#consultation');
+        consultationPage.html(html);
+    }
+
+</script>
+
+

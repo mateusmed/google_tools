@@ -9,28 +9,30 @@ async function saleHtmlBuilded(productId){
                       "Preço unidade Venda",
                       "Data"];
 
-    //todo pegar todas as vendas
+    Logger.log("sale html builded");
 
-    Logger.log("partnerList " + JSON.stringify(partnerList));
+    //todo pegar todas as vendas
 
     if(productId === undefined || productId === "undefined"){
         salePage.push(headerMenu());
-        salePage.push(tableHtml(products, headerList));
+        salePage.push(`<span>sales list</span>`);
         return Promise.all(salePage);
     }
 
     let product = await productDAO.getProductById(productId);
 
+    Logger.log("Sale product: ", JSON.stringify(product));
+
     salePage.push(headerMenu());
     salePage.push("<br/>");
-    salePage.push(formSale(product, partnerList));
+    salePage.push(formSale(product));
 
     return Promise.all(salePage);
 }
 
 
 
-async function formSale(){
+async function formSale(product){
 
     let form = [];
 
@@ -40,20 +42,15 @@ async function formSale(){
     
       ${await messageBox()}
 
-      <h4>Produto:</h4>  
+      <h4>Venda:</h4>  
     
       <div class="form-group-father">
 
-        ${await input("", "hidden", "id", product.id, "disabled")}
-        ${await input("Nome", "text", "name", product.name)}
-        ${await input("Quantidade", "number", "qtd", product.quantity)}
-        ${await input("Preço unidade compra", "number", "ppuc", product.purchaseUnitPrice)}
-        ${await input("Preço unidade venda", "number", "ppuv", product.estimatedUnitSalePrice)}        
-        ${await input("Descrição", "text", "description", product.description)}
+        <span>sales page with product id ${product.id}</span>
             
       </div>`);
 
     form.push(`</div>`);
 
-
+    return form.join("");
 }

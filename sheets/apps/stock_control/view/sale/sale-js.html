@@ -2,15 +2,14 @@
 <script>
 
     $(function() {
-        google.script.run.withSuccessHandler(renderProductPage).saleHtmlBuilded(productId, productName);
+        google.script.run.withSuccessHandler(renderSalePage).saleHtmlBuilded(productId);
     });
 
-    // function renderProductPage(html) {
-    //
-    //     var productPage = $('#product');
-    //     productPage.html(html);
-    //     document.getElementById("save").addEventListener("click", save);
-    // }
+    function renderSalePage(html) {
+
+        var salePage = $('#sale');
+        salePage.html(html);
+    }
     //
     // function getDataForm(){
     //

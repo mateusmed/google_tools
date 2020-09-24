@@ -38,8 +38,8 @@ async function headerMenu(page){
 
   let product = currentUrl() + "/product";
   let sale = currentUrl() + "/sale";
-  let statistics = currentUrl() + "/statistics";
-  let onlineConsultation = currentUrl() + "/onlineConsultation";
+  let statistic = currentUrl() + "/statistic";
+  let consultation = currentUrl() + "/consultation";
 
   let headerMenuList = `<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
                         <a class="navbar-brand" href="${currentUrl()}">${mainText}</a>
@@ -63,10 +63,10 @@ async function headerMenu(page){
              <a class="nav-link" href="${sale}"> Vendas </a>
           </li>
           <li class="nav-item {statistic}">
-             <a class="nav-link" href="${statistics}">Estatistica</a>
+             <a class="nav-link" href="${statistic}">Estatistica</a>
           </li>
           <li class="nav-item {statistic}">
-             <a class="nav-link" href="${onlineConsultation}">Consulta Online</a>
+             <a class="nav-link" href="${consultation}">Consulta Online</a>
           </li>
        </ul>
        </div>
