@@ -17,7 +17,13 @@ class Database {
             "investment": ["id",
                            "id_partner",
                            "id_product",
-                           "value"]
+                           "value"],
+
+            "sale":["id",
+                    "date_sale",
+                    "id_product",
+                    "quantity",
+                    "price_unit_value"]
         }
     }
 

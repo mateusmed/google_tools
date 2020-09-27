@@ -1,5 +1,5 @@
 
-async function saleHtmlBuilded(productId, productName){
+async function saleHtmlBuilded(productId, productName, qtd){
 
     let salePage = [];
 
@@ -29,14 +29,14 @@ async function saleHtmlBuilded(productId, productName){
 
     salePage.push(headerMenu());
     salePage.push("<br/>");
-    salePage.push(formSale(productId, productName));
+    salePage.push(formSale(productId, productName, qtd));
 
     return Promise.all(salePage);
 }
 
 
 
-async function formSale(productId, productName){
+async function formSale(productId, productName, qtd){
 
     Logger.log("form sale, ", productId, productName);
 
@@ -52,10 +52,13 @@ async function formSale(productId, productName){
       <h4>${productName}</h4>
       <br/>
       
+      <h6>Parece que temos ${qtd} unidades disponíveis</h6>
+      <br/>
+      
       <div class="form-group-father">         
          ${await input("", "hidden", "productId", productId, "disabled")}
          ${await input("Preço unidade", "number", "price", "")}
-         ${await input("Quantidade", "number", "qtd", 1)}
+         ${await input("Quantidade", "number", "qtdSale", 1)}
          <br/>   
          ${await button("save", "Vendido")}
       </div>`);

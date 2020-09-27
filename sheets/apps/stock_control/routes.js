@@ -47,10 +47,12 @@ function salePage(event){
 
   if(event.parameters["productId"] === undefined){
     salePage["productId"] = "undefined";
-    salePage["productName"] = "null";
+    salePage["productName"] = "undefined";
+    salePage["qtd"] = "undefined";
   }else{
     salePage["productId"] = event.parameters["productId"];
     salePage["productName"] = event.parameters["productName"];
+    salePage["qtd"] = event.parameters["qtd"];
   }
 
   return salePage.evaluate();

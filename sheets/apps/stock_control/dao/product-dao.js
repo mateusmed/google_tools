@@ -19,21 +19,9 @@ class ProductDao{
         return await genericDAO.getById(tableName, productId);
     }
 
-    async saveOrUpdate(product){
+    async saveOrUpdate(productArrayValues){
 
-        //todo ----> se vier em json a ordem dos dados pode vir alterados
-        //todo se tu realmente quisesse que eles viessem em ordem vc mandava uma lista
-
-
-        let productArrayValues = [product.id,
-                                  product.name,
-                                  product.qtd,
-                                  product.ppuc,
-                                  product.ppuv,
-                                  product.description];
-
-
-        if(product.id === undefined || product.id === ""){
+        if(productArrayValues[0] === undefined || productArrayValues[0] === ""){
             return genericDAO.createItem(this.productTable.name,
                                          productArrayValues,
                                          this.productTable.columns.length);

@@ -45,30 +45,30 @@
         }
     }
     
-    function renderMessageResponse(typeAlert, message){
-    
-       let msg = `<div class="alert alert-${typeAlert}" role="alert">
-                      ${message}
-                  </div>`
-
-       let content = $('#message-box');
-       content.html(msg);
-    }
-    
-    function cleanMessageBox(){
-       var message = $('#message-box');
-	   message.html("");       
-    }
+    // function renderMessageResponse(typeAlert, message){
+    //
+    //    let msg = `<div class="alert alert-${typeAlert}" role="alert">
+    //                   ${message}
+    //               </div>`
+    //
+    //    let content = $('#message-box');
+    //    content.html(msg);
+    // }
+    //
+    // function cleanMessageBox(){
+    //    var message = $('#message-box');
+	//    message.html("");
+    // }
     
      function save(){
 
-        cleanMessageBox()
+        // cleanMessageBox()
 
         //todo validar informações REQUIRED
         let data = getDataForm();
         alert(JSON.stringify(data));
 
-        google.script.run.withSuccessHandler(renderMessageResponse("primary", "message")).saveOrUpdateProduct(data);
+        google.script.run.withSuccessHandler().saveOrUpdateProduct(data);
 
      }
 

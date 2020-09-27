@@ -3,6 +3,15 @@ async function messageBox(){
   return '<div id="message-box"></div>';
 }
 
+
+async function renderMessageResponse(typeAlert, message){
+
+    return `<div class="alert alert-${typeAlert}" role="alert">
+                      ${message}
+            </div>`
+}
+
+
 async function input(label, type, id, value, disabled){
 
     if(disabled === undefined){
@@ -108,7 +117,7 @@ async function tableProduct(itemList, headerList){
    for(let item of itemList){
       
       let editDestiny = currentUrl() + "/product?id="+ item.id;
-      let saleDestiny = currentUrl() + `/sale?productId=${item.id}&productName=${item.name}`;
+      let saleDestiny = currentUrl() + `/sale?productId=${item.id}&productName=${item.name}&qtd=${item.quantity}`;
      
       table.push(
       `<tr>

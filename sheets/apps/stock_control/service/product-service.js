@@ -40,7 +40,15 @@ class ProductService {
 
         Logger.log("[productService] received data ", JSON.stringify(data));
 
-        await productDAO.saveOrUpdate(data);
+        let productArrayValues = [data.id,
+                                  data.name,
+                                  data.qtd,
+                                  data.ppuc,
+                                  data.ppuv,
+                                  data.description];
+
+        await productDAO.saveOrUpdate(productArrayValues);
+
         let investmentFormList = data.investment;
 
         for(let item of investmentFormList){
@@ -54,8 +62,6 @@ class ProductService {
         }
     }
 }
-
-
 
 
 //--------------------------- call from page
