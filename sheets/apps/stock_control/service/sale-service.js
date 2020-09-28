@@ -2,17 +2,22 @@
 
 class SaleService{
 
-    async getAllSale(){
+    async getAllSaleTable(){
 
-        let productList = await productDAO.getAll();
+        let saleList = await saleDAO.getAll();
 
-        let productListReturn = []
+        let saleListReturn = []
 
-        for(let product of productList){
-            await productListReturn.push(new ProductTableDTO(product))
+        for(let sale of saleList){
+
+            //todo melhorar isso aqui
+            let productId = sale[2];
+            let product = await productDAO.getById(productId);
+
+            await saleListReturn.push(new SaleTableDTO(sale, product))
         }
 
-        return productListReturn;
+        return saleListReturn;
     }
 
     async saveOrUpdateSaleForm(data){

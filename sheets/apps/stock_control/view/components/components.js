@@ -85,6 +85,8 @@ async function headerMenu(page){
 }
 
 
+
+//todo [refactory] -  criar uma tabela generica
 async function tableProduct(itemList, headerList){
 
    let itemMatriz = await itemList;
@@ -153,11 +155,10 @@ async function tableProduct(itemList, headerList){
 
 
 
-
+//todo [refactory] -  criar uma tabela generica
 async function tableSale(itemList, headerList){
 
     // let itemMatriz = await itemList;
-
     let table = [];
 
     //se itens for vazio montar uma resposta legal.
@@ -179,8 +180,8 @@ async function tableSale(itemList, headerList){
     });
 
     table.push( `</tr> 
-          </thead> 
-        <tbody>`);
+              </thead> 
+            <tbody>`);
 
 
     for(let item of itemList){
@@ -190,7 +191,10 @@ async function tableSale(itemList, headerList){
         table.push(
             `<tr>
            <td> ${item.id} </td> 
-           <td> ${item.name} </td>
+           <td> ${item.dateSale} </td>
+           <td> ${item.productName} </td>
+           <td> ${item.quantity} </td>
+           <td> ${item.priceUnitValue} </td>
            <td> 
            
            <div class="btn-group">

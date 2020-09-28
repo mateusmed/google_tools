@@ -36,29 +36,38 @@ class ProductService {
 
     async saveOrUpdateProductForm(data){
 
-        let productId = data.id;
+        try{
 
-        Logger.log("[productService] received data ", JSON.stringify(data));
+            let productId = data.id;
 
-        let productArrayValues = [data.id,
-                                  data.name,
-                                  data.qtd,
-                                  data.ppuc,
-                                  data.ppuv,
-                                  data.description];
+            Logger.log("[productService] received data ", JSON.stringify(data));
 
-        await productDAO.saveOrUpdate(productArrayValues);
+            let productArrayValues = [data.id,
+                                      data.name,
+                                      data.qtd,
+                                      data.ppuc,
+                                      data.ppuv,
+                                      data.description];
 
-        let investmentFormList = data.investment;
+            await productDAO.saveOrUpdate(productArrayValues);
 
-        for(let item of investmentFormList){
+            let investmentFormList = data.investment;
 
-            Logger.log("[productService] in loop ");
+            for(let item of investmentFormList){
 
-            let investment = [item.investment_id, item.partner_id, productId, item.value];
+                Logger.log("[productService] in loop ");
 
-            Logger.log("[productService] investment to save or update "+ investment);
-            await investmentDAO.saveOrUpdate(investment)
+                let investment = [item.investment_id, item.partner_id, productId, item.value];
+
+                Logger.log("[productService] investment to save or update "+ investment);
+                await investmentDAO.saveOrUpdate(investment)
+            }
+
+            return await renderMessageResponse("primary", "sucesso ao salvar");
+
+        }catch (error){
+            return await renderMessageResponse("danger",
+                `ocorreu um erro inesperado${JSON.stringify(error)}`);
         }
     }
 }
@@ -67,7 +76,7 @@ class ProductService {
 //--------------------------- call from page
 
 async function saveOrUpdateProduct(data){
-    await productService.saveOrUpdateProductForm(data);
+    return await productService.saveOrUpdateProductForm(data);
 }
 
 

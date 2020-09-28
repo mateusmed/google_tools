@@ -91,6 +91,37 @@ class ProductTableDTO {
 }
 
 
+//todo melhorar a estrutura de dto
+// class SaleDTO {
+//
+//     constructor(sale) {
+//
+//         let saleTable = database.getTable("sale");
+//
+//         this.id = sale[saleTable.columns.indexOf("id")];
+//         this.dateSale = sale[saleTable.columns.indexOf("date_sale")];
+//         this.productId = sale[saleTable.columns.indexOf("id_product")];
+//         this.quantity  = sale[saleTable.columns.indexOf("quantity")];
+//         this.priceUnitValue = sale[saleTable.columns.indexOf("price_unit_value")];
+//     }
+// }
+
+class SaleTableDTO {
+
+    constructor(sale, product) {
+
+        let saleTable = database.getTable("sale");
+        let productTable = database.getTable("product");
+
+        this.id = sale[saleTable.columns.indexOf("id")];
+        this.dateSale = sale[saleTable.columns.indexOf("date_sale")];
+        this.productName = product[productTable.columns.indexOf("name")];
+        this.quantity  = sale[saleTable.columns.indexOf("quantity")];
+        this.priceUnitValue = sale[saleTable.columns.indexOf("price_unit_value")];
+    }
+}
+
+
 class InvestmentDTO {
 
     constructor(investment, partner) {

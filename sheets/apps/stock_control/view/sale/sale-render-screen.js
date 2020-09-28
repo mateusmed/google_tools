@@ -3,25 +3,23 @@ async function saleHtmlBuilded(productId, productName, qtd){
 
     let salePage = [];
 
-    let headerList = ["Id",
-                      "Produto",
-                      "Quantidade",
-                      "Preço unidade Venda",
-                      "Data"];
-
     Logger.log("sale html builded");
 
     //todo pegar todas as vendas
 
-    let itemListTest = [
-        {"id": "1", "name": "nome"},
-        {"id": "2", "name": "nome2"}
-    ]
+    let itensSales =  await saleService.getAllSaleTable();
+
+    let headerList = ["id",
+                      "Data Venda",
+                      "Nome do produto",
+                      "Quantidade",
+                      "Preço unidade venda",
+                      "ação"]
 
     if(productId === undefined || productId === "undefined"){
         salePage.push(headerMenu());
         salePage.push("<br/>");
-        salePage.push(tableSale(itemListTest, ["id", "nome", "action"]));
+        salePage.push(tableSale(itensSales, headerList));
         return Promise.all(salePage);
     }
 
