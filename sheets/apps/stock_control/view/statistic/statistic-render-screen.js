@@ -29,6 +29,8 @@ async function bodyStatistic(){
       <div class="form-group-father">
 
         <span>statistic page</span>
+        
+        <canvas id="myChart" style="max-width: 500px;"></canvas>
             
       </div>`);
 
