@@ -3,38 +3,48 @@ async function statisticHtmlBuilded(){
 
     let statisticPage = [];
 
-    Logger.log("statistic html builded");
+    let statisticOfPartners = await statisticService.getStatisticOfPartners();
+
+    Logger.log("statistic html builded => ", JSON.stringify(statisticOfPartners));
 
     statisticPage.push(headerMenu());
     statisticPage.push("<br/>");
-    statisticPage.push(bodyStatistic());
+    statisticPage.push(bodyStatistic(statisticOfPartners));
 
-    return Promise.all(statisticPage);
+    let html = await Promise.all(statisticPage);
+
+    return {
+        "html": html,
+        "data": statisticOfPartners
+    }
 }
 
 
 
-async function bodyStatistic(){
+async function bodyStatistic(statisticOfPartners){
 
     let body = [];
 
-    //todo montar o form corretamente
-
     body.push(`<div class="container">
-    
-      ${await messageBox()}
+                  
+                  ${await messageBox()}
 
-      <h4>Statistic:</h4>  
-    
-      <div class="form-group-father">
+                  <h4>Statistic:</h4>
+                    <div class="container">    
+                        ${await barChart()}
+                        
+                        <br/>`);
 
-        <span>statistic page</span>
-        
-        <canvas id="myChart" style="max-width: 500px;"></canvas>
-            
-      </div>`);
 
-    body.push(`</div>`);
+    body.push(`<div class="row">`)
+        for(let item of statisticOfPartners){
+            body.push( await doughnutChart(item.id, item.name));
+        }
+
+    body.push(`</div>`)
+
+    body.push(`</div>      
+              </div>`);
 
     return body.join("");
 }

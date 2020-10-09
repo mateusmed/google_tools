@@ -90,8 +90,7 @@ class ProductTableDTO {
     }
 }
 
-
-//todo melhorar a estrutura de dto
+//todo melhorar a estrutura de dto ---> está ruim
 // class SaleDTO {
 //
 //     constructor(sale) {

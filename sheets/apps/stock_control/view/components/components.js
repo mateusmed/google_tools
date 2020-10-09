@@ -11,7 +11,6 @@ async function renderMessageResponse(typeAlert, message){
             </div>`
 }
 
-
 async function input(label, type, id, value, disabled){
 
     if(disabled === undefined){
@@ -33,8 +32,6 @@ async function input(label, type, id, value, disabled){
            `
 }
 
-
-
 async function button(id, label){
   return `<button id="${id}" class="btn btn-primary">${label}</button>`
 }
@@ -48,6 +45,7 @@ async function headerMenu(page){
   let product = currentUrl() + "/product";
   let sale = currentUrl() + "/sale";
   let statistic = currentUrl() + "/statistic";
+  let payment = currentUrl() + "/payment";
   let consultation = currentUrl() + "/consultation";
 
   let headerMenuList = `<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
@@ -73,6 +71,9 @@ async function headerMenu(page){
           </li>
           <li class="nav-item {statistic}">
              <a class="nav-link" href="${statistic}">Estatistica</a>
+          </li>
+          <li class="nav-item {statistic}">
+             <a class="nav-link" href="${payment}">Pagamento</a>
           </li>
           <li class="nav-item {statistic}">
              <a class="nav-link" href="${consultation}">Consulta Online</a>
@@ -153,6 +154,30 @@ async function tableProduct(itemList, headerList){
   return table.join("");
 }
 
+
+async function doughnutChart(id, title){
+
+    return `<div class="col">
+                    <h2>${title}</h2>
+                    <canvas id="${id}" style="max-width: 500px;"></canvas>
+            </div>`
+}
+
+
+
+async function barChart(){
+
+    return `<div class="row">        
+                  <div class="col">
+                        <h2>bar chart</h2>
+                        <canvas id="barChart" style="max-width: 500px;"></canvas>
+                  </div>
+                  <div class="col">
+                        <h2>bar chart</h2>
+                        <canvas id="horizontalBar"></canvas>
+                  </div>
+            </div>`
+}
 
 
 //todo [refactory] -  criar uma tabela generica

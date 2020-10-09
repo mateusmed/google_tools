@@ -3,6 +3,7 @@ async function productHtmlBuilded(productId){
 
   let productPage = [];
 
+  //todo pegar do service
   let partnerList = await partnerDao.getAllPartner();
 
   Logger.log("partnerList " + JSON.stringify(partnerList));

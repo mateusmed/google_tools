@@ -19,6 +19,10 @@ class Database {
                            "id_product",
                            "value"],
 
+            "payment": ["id",
+                        "id_partner",
+                        "value"],
+
             "sale":["id",
                     "date_sale",
                     "id_product",

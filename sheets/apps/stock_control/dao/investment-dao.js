@@ -33,6 +33,23 @@ class InvestmentDao{
         return investmentDTOS;
     }
 
+    async getInvestmentByPartnerId(partnerId) {
+
+        let idPartnerIndex = this.investmentTable.columns.indexOf("id_partner");
+        let valueIndex = this.investmentTable.columns.indexOf("value");
+
+        let investmentList =  await genericDAO.getWhenColumnEqualValue(this.investmentTable.name,
+                                                                       idPartnerIndex,
+                                                                       partnerId);
+
+        function getTotal(total, item) {
+            return total + item[valueIndex];
+        }
+
+        return  await investmentList.reduce(getTotal, 0);
+    }
+
+
     async saveOrUpdate(item){
 
         if(item[0] === undefined ||  item[0] === "undefined" ||  item[0] === ""){
