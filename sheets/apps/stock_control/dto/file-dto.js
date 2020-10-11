@@ -112,8 +112,10 @@ class SaleTableDTO {
         let saleTable = database.getTable("sale");
         let productTable = database.getTable("product");
 
+        let dateSale = sale[saleTable.columns.indexOf("date_sale")];
+
         this.id = sale[saleTable.columns.indexOf("id")];
-        this.dateSale = sale[saleTable.columns.indexOf("date_sale")];
+        this.dateSale = getDateNow(dateSale);
         this.productName = product[productTable.columns.indexOf("name")];
         this.quantity  = sale[saleTable.columns.indexOf("quantity")];
         this.priceUnitValue = sale[saleTable.columns.indexOf("price_unit_value")];

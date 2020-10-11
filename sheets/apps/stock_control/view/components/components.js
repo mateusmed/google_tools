@@ -169,12 +169,12 @@ async function barChart(){
 
     return `<div class="row">        
                   <div class="col">
-                        <h2>bar chart</h2>
+                        <h2>Estoque/vendidos</h2>
                         <canvas id="barChart" style="max-width: 500px;"></canvas>
                   </div>
                   <div class="col">
-                        <h2>bar chart</h2>
-                        <canvas id="horizontalBar"></canvas>
+                        <h2>Produtos mais velhos</h2>
+                        <canvas id="horizontalBar" style="max-width: 500px;"></canvas>
                   </div>
             </div>`
 }

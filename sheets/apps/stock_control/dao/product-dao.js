@@ -22,12 +22,12 @@ class ProductDao{
     async saveOrUpdate(productArrayValues){
 
         if(productArrayValues[0] === undefined || productArrayValues[0] === ""){
-            return genericDAO.createItem(this.productTable.name,
+            return await genericDAO.createItem(this.productTable.name,
                                          productArrayValues,
                                          this.productTable.columns.length);
         }
 
-        return genericDAO.updateItem(this.productTable.name,
+        return await genericDAO.updateItem(this.productTable.name,
                                      productArrayValues,
                                      this.productTable.columns.length);
     }

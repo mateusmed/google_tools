@@ -19,8 +19,6 @@ async function statisticHtmlBuilded(){
     }
 }
 
-
-
 async function bodyStatistic(statisticOfPartners){
 
     let body = [];

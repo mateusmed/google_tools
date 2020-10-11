@@ -1,8 +1,6 @@
 
 class ProductService {
 
-    constructor() {}
-
     async getAllProducts(){
         let productList = await productDAO.getAll();
 
@@ -38,8 +36,6 @@ class ProductService {
 
         try{
 
-            let productId = data.id;
-
             Logger.log("[productService] received data ", JSON.stringify(data));
 
             let productArrayValues = [data.id,
@@ -49,7 +45,7 @@ class ProductService {
                                       data.ppuv,
                                       data.description];
 
-            await productDAO.saveOrUpdate(productArrayValues);
+            let productId = await productDAO.saveOrUpdate(productArrayValues);
 
             let investmentFormList = data.investment;
 
@@ -66,12 +62,14 @@ class ProductService {
             return await renderMessageResponse("primary", "sucesso ao salvar");
 
         }catch (error){
+
+            Logger.log("[productService] received data ", JSON.stringify(data));
+
             return await renderMessageResponse("danger",
                 `ocorreu um erro inesperado${JSON.stringify(error)}`);
         }
     }
 }
-
 
 //--------------------------- call from page
 

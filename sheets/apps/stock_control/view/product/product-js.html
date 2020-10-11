@@ -21,7 +21,6 @@
         let ppuv = $("#ppuv").val();
         let description = $("#description").val();
 
-        //todo pegar investment data
         let investmentsForm = $('div[id^="investment_"]');
         let investmentsList = [];
 
@@ -42,7 +41,7 @@
             "ppuv": ppuv,
             "description": description,
             "investment": investmentsList
-        }
+        };
     }
     
      function save(){

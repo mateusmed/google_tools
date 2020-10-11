@@ -15,6 +15,7 @@ class StatistcService {
             let payment_value =await paymentDao.getPaymentsOfPartner(item.id);
 
             list.push({
+                "id": item.id,
                 "name": item.name,
                 "investmentValue": investment_value,
                 "paymentValue": payment_value
@@ -30,7 +31,7 @@ class StatistcService {
 
 //--------------------------- call from page
 
-async function saveOrUpdateProduct(data){
+async function saveOrUpdateStatisct(data){
 }
 
 

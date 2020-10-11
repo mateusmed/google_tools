@@ -75,6 +75,8 @@ class GenericDao {
         ws.getRange(id, 1, 1, numColumns).setValues([item]);
 
         Logger.log(`======> rangeSaved`);
+
+        return item[0];
     }
 
     async updateItem(from, item, numColumns){

@@ -17,6 +17,8 @@ class SaleService{
             await saleListReturn.push(new SaleTableDTO(sale, product))
         }
 
+        Logger.log("[saleService] saleListReturn ", JSON.stringify(typeof saleListReturn[0].dateSale));
+
         return saleListReturn;
     }
 

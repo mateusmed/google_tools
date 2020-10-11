@@ -5,9 +5,9 @@
         google.script.run.withSuccessHandler(renderStatisticPage).statisticHtmlBuilded();
     });
 
-    function renderStatisticPage(json) {
+    async function renderStatisticPage(json) {
 
-        var statisticPage = $('#statistic');
+        let statisticPage = $('#statistic');
         statisticPage.html(json.html);
 
         alert(JSON.stringify(json.data));
@@ -16,10 +16,9 @@
             renderBarChart();
             horizontalBarChart();
 
-            renderDoughnutChart1(json.data[0]);
-            // renderDoughnutChart2();
-            // renderDoughnutChart3();
-            // renderDoughnutChart4();
+            for(let item of json.data){
+                renderDoughnutChart(item);
+            }
         });
     }
 
@@ -106,13 +105,10 @@
     }
 
 
-    function renderDoughnutChart1(data){
-        //doughnut
+    function renderDoughnutChart(data){
 
-        alert(JSON.stringify(data));
-
-        var ctxD = document.getElementById(data.id).getContext('2d');
-        var myLineChart = new Chart(ctxD, {
+        let ctxD = document.getElementById(data.id).getContext('2d');
+        let myLineChart = new Chart(ctxD, {
             type: 'doughnut',
             data: {
                 labels: ["Red", "Green"],
