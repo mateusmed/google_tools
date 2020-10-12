@@ -57,7 +57,14 @@ class SaleService{
                                    data.qtdSale,
                                    data.price];
 
-            await saleDAO.saveOrUpdate(saleArrayValues)
+            //registra venda
+            await saleDAO.save(saleArrayValues)
+
+            let partnerCompany = await partnerDao.getPartnerCompany();
+            let totalValueSale = (data.qtdSale * data.price);
+
+            //valor atribuido para "empresa"
+            await paymentDao.save(["", partnerCompany.id, totalValueSale]);
 
             return await renderMessageResponse("primary", "sucesso ao salvar");
 

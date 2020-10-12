@@ -11,13 +11,7 @@ class SaleDao{
         return await genericDAO.getAll(tableName);
     }
 
-    async saveOrUpdate(saleArrayValues) {
-
-        // if(product.id === undefined || product.id === ""){
-        //     return genericDAO.createItem(this.saleTable.name,
-        //         saleArrayValues,
-        //         this.saleTable.columns.length);
-        // }
+    async save(saleArrayValues) {
 
         return genericDAO.createItem(this.saleTable.name,
                                      saleArrayValues,

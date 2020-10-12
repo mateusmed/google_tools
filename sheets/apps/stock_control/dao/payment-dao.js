@@ -21,6 +21,14 @@ class PaymentDao {
         return  await investmentList.reduce(getTotal, 0);
     }
 
+
+    async save(paymentArrayValues){
+
+        return await genericDAO.createItem(this.paymentTable.name,
+                                           paymentArrayValues,
+                                           this.paymentTable.columns.length);
+
+    }
 }
 
 const paymentDao = new PaymentDao();

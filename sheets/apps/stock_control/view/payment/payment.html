@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- MDBootstrap Datatables  -->
+    <!-- <link href="css/addons/datatables.min.css" rel="stylesheet"> -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <base target="_top">
+    <?!= include("view/components/spinner-css"); ?>
 </head>
 <body>
 
-    paymentPage
+<div id="payment">
+    <div class="loader">
+    </div>
+</div>
 
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<!-- this script need to be here to foward productId variable-->
+<!-- when render another file the context is lost, this need to be here-->
+<script>
+
+</script>
+
+
+<?!= include("view/default-js"); ?>
+<?!= include("view/payment/payment-js"); ?>
 
 </body>
 </html>
+
+

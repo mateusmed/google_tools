@@ -23,6 +23,20 @@ class PartnerDao{
         return genericDAO.getById(this.partnerTable.name, id);
     }
 
+
+    async getPartnerCompany() {
+
+        let partnerList = await genericDAO.getAll(this.partnerTable.name);
+
+         let partnerFound = partnerList.filter((item) => {
+
+             return (item[1] === "NewHard");
+        })
+
+        Logger.log("partnerFound: " + JSON.stringify(partnerFound));
+        return new PartnerDTO(partnerFound);
+    }
+
 }
 
 const partnerDao = new PartnerDao();

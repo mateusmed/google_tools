@@ -19,7 +19,10 @@ async function saleHtmlBuilded(productId, productName, qtd){
     if(productId === undefined || productId === "undefined"){
         salePage.push(headerMenu());
         salePage.push("<br/>");
+        salePage.push(`<div class="container">`);
         salePage.push(tableSale(itensSales, headerList));
+        salePage.push(`</div>`);
+        salePage.push("<br/>");
         return Promise.all(salePage);
     }
 

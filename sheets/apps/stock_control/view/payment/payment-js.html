@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<script>
 
-</body>
-</html>
+    $(function() {
+        google.script.run.withSuccessHandler(renderProductPage).paymentHtmlBuilded();
+    });
+
+    function renderProductPage(html) {
+        let paymentPage = $('#payment');
+        paymentPage.html(html);
+        document.getElementById("save").addEventListener("click", save);
+    }
+
+    function save(){
+
+        cleanMessageBox()
+
+        //todo validar informações REQUIRED
+        let data = getDataForm();
+        alert(JSON.stringify(data));
+
+        google.script.run.withSuccessHandler(createMessageResponse).saveOrUpdateProduct(data);
+
+    }
+</script>
+
+

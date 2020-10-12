@@ -68,6 +68,11 @@ async function formProduct(product, partnerList){
         `);
   }
 
+  // TODO adicionar um botão de editar ou salvar,
+  // se for salvar criará novos dados em investimento
+  // isso acontece caso o produto tenha zerado, gerando um novo investimento para
+  // cada um dos investidores
+
   form.push(`
         <br/>
         ${await button("save", "salvar")}
