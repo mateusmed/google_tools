@@ -5,6 +5,8 @@ class PaymentService {
 
         try{
 
+            Logger.log("[paymentService] received data ", JSON.stringify(data));
+
             return await renderMessageResponse("primary", "sucesso ao salvar");
 
         }catch (error){
@@ -20,9 +22,6 @@ class PaymentService {
 //--------------------------- call from page
 
 async function savePayment(data){
-
-    // saleService.getAllSaleTable()
-
     return await paymentService.savePaymentForm(data);
 }
 

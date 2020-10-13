@@ -10,6 +10,26 @@
         document.getElementById("save").addEventListener("click", save);
     }
 
+
+    function getDataForm(){
+
+        let partnersForm = $('input[id^="partner_"]');
+        let partnerList = [];
+
+        for (let i = 0; i < partnersForm.length; i++ ){
+
+            partnerList.push({
+                "id": partnersForm[i].id.replace("partner_", ""),
+                "value": partnersForm[i].value
+            })
+        }
+
+        return {
+            "partners": partnerList
+        };
+    }
+
+
     function save(){
 
         cleanMessageBox()
@@ -18,7 +38,7 @@
         let data = getDataForm();
         alert(JSON.stringify(data));
 
-        google.script.run.withSuccessHandler(createMessageResponse).saveOrUpdateProduct(data);
+        google.script.run.withSuccessHandler(createMessageResponse).savePayment(data);
 
     }
 </script>

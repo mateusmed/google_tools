@@ -9,7 +9,7 @@ async function paymentHtmlBuilded(){
         return (item.name === "NewHard");
     })
 
-    let cashValue = paymentDao.getPaymentsOfPartner(company.id);
+    let cashValue = paymentDao.getPaymentsOfPartner(company[0].id);
 
     paymentPage.push(headerMenu());
     paymentPage.push(formPayment(partners, cashValue));
