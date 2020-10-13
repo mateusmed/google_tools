@@ -29,12 +29,11 @@ class PartnerDao{
         let partnerList = await genericDAO.getAll(this.partnerTable.name);
 
          let partnerFound = partnerList.filter((item) => {
-
              return (item[1] === "NewHard");
         })
 
-        Logger.log("partnerFound: " + JSON.stringify(partnerFound));
-        return new PartnerDTO(partnerFound);
+        let item = partnerFound[0];
+        return  new PartnerDTO(item);
     }
 
 }

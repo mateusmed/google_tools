@@ -4,12 +4,11 @@ async function paymentHtmlBuilded(){
     let paymentPage = [];
 
     let partners = await partnerDao.getAllPartner();
+    let company = await partnerDao.getPartnerCompany();
 
-    let company = partners.filter((item) => {
-        return (item.name === "NewHard");
-    })
+    Logger.log("company id ", company.id);
 
-    let cashValue = paymentDao.getPaymentsOfPartner(company[0].id);
+    let cashValue = await paymentDao.getPaymentsOfPartner(company.id);
 
     paymentPage.push(headerMenu());
     paymentPage.push(formPayment(partners, cashValue));

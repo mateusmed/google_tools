@@ -18,7 +18,7 @@ class PaymentDao {
             return total + item[valueIndex];
         }
 
-        return  await investmentList.reduce(getTotal, 0);
+        return await investmentList.reduce(getTotal, 0);
     }
 
 
