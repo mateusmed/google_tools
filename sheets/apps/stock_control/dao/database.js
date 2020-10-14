@@ -21,7 +21,8 @@ class Database {
 
             "payment": ["id",
                         "id_partner",
-                        "value"],
+                        "value",
+                        "date"],
 
             "sale":["id",
                     "date_sale",

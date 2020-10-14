@@ -1,6 +1,8 @@
 
 class PaymentService {
 
+    //todo colocar data no pagamento
+
     async savePaymentForm(partnerList){
 
         try{
@@ -19,10 +21,16 @@ class PaymentService {
                 if(debit >= 0){
 
                     //debita
-                    promises.push(paymentDao.save(["", company.id, - partner.value]));
+                    promises.push(paymentDao.save(["",
+                                                                  company.id,
+                                                                  - partner.value,
+                                                                  getDate(undefined)]));
 
                     //credita
-                    promises.push(paymentDao.save(["", partner.id, partner.value]));
+                    promises.push(paymentDao.save(["",
+                                                                  partner.id,
+                                                                  partner.value,
+                                                                  getDate(undefined)]));
                 }
             }
 

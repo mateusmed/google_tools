@@ -7,7 +7,12 @@ class ProductService {
         let productListReturn = []
 
         for(let product of productList){
-            await productListReturn.push(new ProductTableDTO(product))
+
+            let productDTO = new ProductTableDTO(product)
+
+            if(productDTO.quantity !== 0){
+                await productListReturn.push(productDTO);
+            }
         }
 
         return productListReturn;
@@ -32,9 +37,31 @@ class ProductService {
         return productDTO;
     }
 
+    async invalidForm(data){
+
+        let totalProductValue = (data.qtd * data.ppuc);
+
+        let totalInvestment = data.investment.reduce(function (total, item) {
+            return (total + item.value);
+        }, 0);
+
+        if(totalInvestment < totalProductValue){
+            return true;
+        }
+
+        return false;
+    }
+
+
     async saveOrUpdateProductForm(data){
 
         try{
+
+            if(await this.invalidForm(data)){
+
+                return await renderMessageResponse("warning",
+                                            "Investimento não cobre com o valor do produto");
+            }
 
             Logger.log("[productService] received data ", JSON.stringify(data));
 

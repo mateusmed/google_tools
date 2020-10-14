@@ -52,7 +52,7 @@ class SaleService{
             await productDAO.saveOrUpdate(productArrayValues);
 
             let saleArrayValues = ["",
-                                   getDateNow(),
+                                   getDate(),
                                    product.id,
                                    data.qtdSale,
                                    data.price];
@@ -64,7 +64,10 @@ class SaleService{
             let totalValueSale = (data.qtdSale * data.price);
 
             //valor atribuido para "empresa"
-            await paymentDao.save(["", partnerCompany.id, totalValueSale]);
+            await paymentDao.save(["",
+                                                  partnerCompany.id,
+                                                  totalValueSale,
+                                                  getDate(undefined)]);
 
             return await renderMessageResponse("primary", "sucesso ao salvar");
 

@@ -43,14 +43,14 @@
             "investment": investmentsList
         };
     }
-    
+
+
+
      function save(){
 
         cleanMessageBox()
 
-        //todo validar informações REQUIRED
         let data = getDataForm();
-        alert(JSON.stringify(data));
 
         google.script.run.withSuccessHandler(createMessageResponse).saveOrUpdateProduct(data);
 

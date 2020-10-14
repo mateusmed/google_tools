@@ -13,7 +13,7 @@ function currentUrl(){
 }
 
 
-function getDateNow(myDate){
+function getDate(myDate){
 
     if(myDate !== undefined){
 

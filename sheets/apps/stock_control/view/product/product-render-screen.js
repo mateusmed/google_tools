@@ -72,11 +72,19 @@ async function formProduct(product, partnerList){
   // se for salvar criará novos dados em investimento
   // isso acontece caso o produto tenha zerado, gerando um novo investimento para
   // cada um dos investidores
+  // TODO tem q pensar melhor nessa mecanica aqui
+  // TODO produto != lote... lote TEM qtd
 
-  form.push(`
+
+    form.push(`
         <br/>
-        ${await button("save", "salvar")}
+        ${await button("save", "salvar")} 
       </div>`)
+
+    // form.push(`
+    //     <br/>
+    //     ${await button("addItens", "adicionar itens")}
+    //   </div>`)
 
   return form.join("");
 }

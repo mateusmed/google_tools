@@ -23,6 +23,8 @@ async function formPayment(partners, cashValue){
     let form = [];
 
     form.push(`<div class="container">
+                    
+                    <br/>
 
                     ${await messageBox()}
 
