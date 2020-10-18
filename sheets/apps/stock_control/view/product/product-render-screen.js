@@ -3,14 +3,13 @@ async function productHtmlBuilded(productId){
 
   let productPage = [];
 
-  //todo pegar do service
-  let partnerList = await partnerDao.getAllPartner();
+  let companies = await companyService.getAllCompanies();
 
-  Logger.log("partnerList " + JSON.stringify(partnerList));
+  Logger.log("companies ", JSON.stringify(companies));
 
   if(productId === undefined || productId === "undefined"){
     productPage.push(headerMenu());
-    productPage.push(formProduct(undefined, partnerList));
+    productPage.push(formProduct(undefined, companies));
     return Promise.all(productPage);
   }
 
@@ -18,13 +17,13 @@ async function productHtmlBuilded(productId){
 
   productPage.push(headerMenu());
   productPage.push("<br/>");
-  productPage.push(formProduct(product, partnerList));
+  productPage.push(formProduct(product, companies));
   
   return Promise.all(productPage);
 }
 
 
-async function formProduct(product, partnerList){
+async function formProduct(product, companies){
 
   let form = [];
 
@@ -43,48 +42,14 @@ async function formProduct(product, partnerList){
         ${await input("Descrição", "text", "description", product.description)}    
         `);
 
-  form.push("<br>");
-  form.push("<h4>Investidores:</h4>");
-
-  for(let partner of partnerList){
-
-    let investmentFind = {};
-
-    investmentFind = product.investiment.filter((item) => {
-      return item.partner.name === partner.name;
-    })
-
-    if(investmentFind[0] !== undefined){
-      investmentFind["investment_id"] = investmentFind[0].id;
-      investmentFind["value"] = investmentFind[0].value;
-    }
-
-    form.push(
-        `
-        <div id="investment_${investmentFind.investment_id}">
-          ${await input("", "hidden", `partner_id`, `${partner.id}`, "disabled")}
-          ${await input(partner.name, "number", `value`, investmentFind.value)}
-        </div>
-        `);
-  }
-
-  // TODO adicionar um botão de editar ou salvar,
-  // se for salvar criará novos dados em investimento
-  // isso acontece caso o produto tenha zerado, gerando um novo investimento para
-  // cada um dos investidores
-  // TODO tem q pensar melhor nessa mecanica aqui
-  // TODO produto != lote... lote TEM qtd
-
+    form.push(`<br/>
+               ${await selectItem("company", "Dono do produto", companies, product.company.id)}
+               <br/>`);
 
     form.push(`
         <br/>
         ${await button("save", "salvar")} 
       </div>`)
-
-    // form.push(`
-    //     <br/>
-    //     ${await button("addItens", "adicionar itens")}
-    //   </div>`)
 
   return form.join("");
 }

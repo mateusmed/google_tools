@@ -7,16 +7,49 @@ class ProductDao{
 
     async getAll() {
 
-        let tableName = this.productTable.name;
-        return await genericDAO.getAll(tableName);
+        let productList = await genericDAO.getAll(this.productTable.name);
+        let idCompanyIndex = this.productTable.columns.indexOf("id_company");
+
+        let productDTOList = [];
+
+        for(let product of productList){
+
+            let idCompany = product[idCompanyIndex]
+            let company = await companyDao.getCompanyById(idCompany)
+
+            productDTOList.push(new ProductDTO(product, company))
+        }
+
+        return productDTOList;
     }
 
     async getById(productId) {
+        let idCompanyIndex = this.productTable.columns.indexOf("id_company");
 
-        Logger.log("[productDao - getProductById]");
+        let product = await genericDAO.getById(this.productTable.name, productId);
 
-        let tableName = this.productTable.name;
-        return await genericDAO.getById(tableName, productId);
+        let idCompany = product[idCompanyIndex];
+
+        let company = await companyDao.getCompanyById(idCompany);
+
+        let productDTO = new ProductDTO(product, company);
+
+        Logger.log("[productDao - company] ", JSON.stringify(productDTO));
+
+        return productDTO;
+    }
+
+
+    async saveProduct(productArrayValues){
+        await genericDAO.createItem(this.productTable.name,
+                                           productArrayValues,
+                                           this.productTable.columns.length);
+    }
+
+    async updateProduct(productArrayValues){
+        return await genericDAO.updateItem(this.productTable.name,
+                                           productArrayValues,
+                                           this.productTable.columns.length);
     }
 
     async saveOrUpdate(productArrayValues){

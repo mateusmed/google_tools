@@ -21,17 +21,7 @@
         let ppuv = $("#ppuv").val();
         let description = $("#description").val();
 
-        let investmentsForm = $('div[id^="investment_"]');
-        let investmentsList = [];
-
-        for (let i = 0; i < investmentsForm.length; i++ ){
-
-            investmentsList.push({
-                "investment_id": investmentsForm[i].id.replace("investment_", ""),
-                "partner_id": investmentsForm[i].children.partner_id.value,
-                "value": investmentsForm[i].children.value.value
-            })
-        }
+        let companyId = $('#company').find(":selected").val();
 
         return {
             "id": id,
@@ -40,7 +30,7 @@
             "ppuc": ppuc,
             "ppuv": ppuv,
             "description": description,
-            "investment": investmentsList
+            "companyId":companyId
         };
     }
 
@@ -51,6 +41,9 @@
         cleanMessageBox()
 
         let data = getDataForm();
+        alert(JSON.stringify(data));
+
+        //TODO  deixar claro que ao criar um novo produto o valor do produto é imutavel
 
         google.script.run.withSuccessHandler(createMessageResponse).saveOrUpdateProduct(data);
 

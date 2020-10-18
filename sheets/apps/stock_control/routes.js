@@ -15,6 +15,9 @@ function doGet(event) {
     case "statistic":
       return renderPage("statistic");
 
+    case "investment":
+      return renderPage("investment");
+
     case "payment":
       return renderPage("payment");
 

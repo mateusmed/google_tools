@@ -11,6 +11,32 @@ async function renderMessageResponse(typeAlert, message){
             </div>`
 }
 
+
+async function selectItem(id, label, itens, selected){
+
+    let selectItem = [];
+
+    selectItem.push(`<label for="${id}"> ${label}</label>`)
+    selectItem.push(`<select class="browser-default custom-select" name="${id}" id="${id}">`);
+
+    if(selected === undefined){
+        selectItem.push(`<option>Escolha a empresa</option>`);
+    }
+
+    for(let item of itens){
+
+        if(selected !== undefined && item.id === selected.id){
+            selectItem.push(`<option selected value="${item.id}">${item.name}</option>`)
+        }else{
+            selectItem.push(`<option value="${item.id}">${item.name}</option>`)
+        }
+    }
+
+    selectItem.push(`</select>`);
+
+    return selectItem.join("");
+}
+
 async function input(label, type, id, value, disabled){
 
     if(disabled === undefined){
@@ -47,6 +73,7 @@ async function headerMenu(page){
   let statistic = currentUrl() + "/statistic";
   let payment = currentUrl() + "/payment";
   let consultation = currentUrl() + "/consultation";
+  let investment = currentUrl() + "/investment";
 
   let headerMenuList = `<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
                         <a class="navbar-brand" href="${currentUrl()}">${mainText}</a>
@@ -71,6 +98,9 @@ async function headerMenu(page){
           </li>
           <li class="nav-item {statistic}">
              <a class="nav-link" href="${statistic}">Estatistica</a>
+          </li>
+          <li class="nav-item {statistic}">
+             <a class="nav-link" href="${investment}">Investmento</a>
           </li>
           <li class="nav-item {statistic}">
              <a class="nav-link" href="${payment}">Pagamento</a>
@@ -130,6 +160,7 @@ async function tableProduct(itemList, headerList){
            <td> ${item.purchaseUnitPrice} </td>
            <td> ${item.estimatedUnitSalePrice} </td> 
            <td> ${item.description} </td>
+           <td> ${item.company.name} </td>
            <td> 
            
            <div class="btn-group">
@@ -211,24 +242,13 @@ async function tableSale(itemList, headerList){
 
     for(let item of itemList){
 
-        let editDestiny = currentUrl() + "/sale?id="+ item.id;
-
         table.push(
             `<tr>
            <td> ${item.id} </td> 
            <td> ${item.dateSale} </td>
            <td> ${item.productName} </td>
            <td> ${item.quantity} </td>
-           <td> ${item.priceUnitValue} </td>
-           <td> 
-           
-           <div class="btn-group">
-                <a class="btn btn-outline-primary" href="${editDestiny}" role="button">
-                   Editar
-                </a>
-           </div>
-            
-           </td> 
+           <td> ${item.priceUnitValue} </td> 
        </tr> `
         );
     }

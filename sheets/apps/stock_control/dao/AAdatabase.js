@@ -1,5 +1,6 @@
 
-class Database {
+//need to be loading first
+class AAdatabase {
 
     constructor() {
         this.urlDatabase = "https://docs.google.com/spreadsheets/d/1i2NOiagih_MhBoxClr59Lmecux7HatknkZmTFb22YU8/edit#gid=0"
@@ -9,23 +10,28 @@ class Database {
                         "quantity",
                         "purchase_unit_price",
                         "estimated_unit_sale_price",
-                        "description"],
+                        "description",
+                        "id_company"],
 
             "partner": ["id",
                         "name"],
 
+            "company": ["id",
+                        "name"],
+
             "investment": ["id",
                            "id_partner",
-                           "id_product",
-                           "value"],
+                           "id_company",
+                           "value",
+                           "date"],
 
-            "payment": ["id",
-                        "id_partner",
+            "finance": ["id",
+                        "id_user",
                         "value",
                         "date"],
 
             "sale":["id",
-                    "date_sale",
+                    "date",
                     "id_product",
                     "quantity",
                     "price_unit_value"]
@@ -47,4 +53,4 @@ class Database {
 }
 
 
-const database = new Database();
+const database = new AAdatabase();

@@ -16,6 +16,7 @@ async function indexHtmlBuilded(){
                     "Preço Unidade compra",
                     "Preço unidade Venda",
                     "Descrição",
+                    "Pertence",
                     "Action"];
 
   indexPage.push(headerMenu());

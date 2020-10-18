@@ -9,28 +9,28 @@ class PaymentService {
 
             Logger.log("[paymentService] received data ", JSON.stringify(partnerList));
 
-            let company = await partnerDao.getPartnerCompany();
+            let company = await companyDao.getPartnerCompany();
 
             let promises = [];
 
             for(let partner of partnerList){
 
-                let cash = await paymentDao.getPaymentsOfPartner(company.id);
+                let cash = await financeDao.getFinanceOfUser(company.id);
                 let debit = (cash - partner.value);
 
                 if(debit >= 0){
 
                     //debita
-                    promises.push(paymentDao.save(["",
-                                                                  company.id,
-                                                                  - partner.value,
-                                                                  getDate(undefined)]));
+                    promises.push(financeDao.save(["",
+                                                  company.id,
+                                                  - partner.value,
+                                                  getDate(undefined)]));
 
                     //credita
-                    promises.push(paymentDao.save(["",
-                                                                  partner.id,
-                                                                  partner.value,
-                                                                  getDate(undefined)]));
+                    promises.push(financeDao.save(["",
+                                                  partner.id,
+                                                  partner.value,
+                                                  getDate(undefined)]));
                 }
             }
 

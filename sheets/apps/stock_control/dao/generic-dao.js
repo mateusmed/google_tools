@@ -1,5 +1,6 @@
 
 
+//todo REFATORAR
 class GenericDao {
 
     async getAll(from) {
@@ -38,20 +39,27 @@ class GenericDao {
 
     //todo atenção está pegando pelo id mas esta salvando e criando pelo index
     async getById(from, id) {
+
+        Logger.log(`======> getById from [${JSON.stringify(from)}] 
+                                   id [${JSON.stringify(id)}]`);
+
         let ss = SpreadsheetApp.openByUrl(database.urlDatabase);
         let ws = ss.getSheetByName(from);
 
         let list =  ws.getDataRange().getValues();
 
-        //todo pensar em pegar direto pelo index, vai ficar mais rapido;
+        Logger.log(`======> getById list [${JSON.stringify(list)}]`);
 
         let find = list.filter((item) => {
             return (item[0] == id);
         })
 
         if(find[0] === undefined){
+            Logger.log(`======> getById find[0] undefined, return emptyList`);
             return [];
         }
+
+        Logger.log(`======> getById find[0] [${JSON.stringify(find[0])}]`);
         return find[0]; 
     }
 
@@ -63,7 +71,9 @@ class GenericDao {
     //ws.getRange(row, column, numRows, numColumns)
     async createItem(from, item, numColumns){
 
-        Logger.log(`======> create item from [${JSON.stringify(from)}] item [${JSON.stringify(item)}] numColumns [${numColumns}]`);
+        Logger.log(`======> create from [${JSON.stringify(from)}] 
+                                   item [${JSON.stringify(item)}] 
+                                   numColumns [${numColumns}]`);
 
         let ss = SpreadsheetApp.openByUrl(database.urlDatabase);
         let ws = ss.getSheetByName(from);
@@ -76,9 +86,10 @@ class GenericDao {
 
         Logger.log(`======> rangeSaved`);
 
-        return item[0];
+        return item;
     }
 
+    //TODO esta atualizando pelo index, tem q atualizar pelo id do objeto
     async updateItem(from, item, numColumns){
 
         Logger.log(`======> update item from [${JSON.stringify(from)}] item [${JSON.stringify(item)}] numColumns [${numColumns}]`);

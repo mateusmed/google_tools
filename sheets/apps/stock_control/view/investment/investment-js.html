@@ -1,0 +1,50 @@
+
+<script>
+
+    $(function() {
+        google.script.run.withSuccessHandler(renderInvestmentPage).investmentHtmlBuilded();
+    });
+
+    function renderInvestmentPage(html) {
+    
+       var investmentPage = $('#investment');
+       investmentPage.html(html);
+       document.getElementById("save").addEventListener("click", save);
+    }
+
+    function getDataForm(){
+
+        let partnersForm = $('input[id^="partner_"]');
+        let partnerList = [];
+
+        for (let i = 0; i < partnersForm.length; i++ ){
+
+            partnerList.push({
+                "id": partnersForm[i].id.replace("partner_", ""),
+                "value": partnersForm[i].value
+            })
+        }
+
+        let companyId = $('#company').find(":selected").val();
+
+        return {"companyId": companyId,
+                "partners": partnerList}
+    }
+
+
+    function save(){
+
+        cleanMessageBox()
+
+        //todo validar informações REQUIRED
+        let data = getDataForm();
+        alert(JSON.stringify(data));
+
+        google.script.run.withSuccessHandler(createMessageResponse).saveInvestment(data);
+
+    }
+
+    
+</script>
+
+

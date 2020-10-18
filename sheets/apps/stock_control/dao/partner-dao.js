@@ -1,11 +1,12 @@
 
 
 class PartnerDao{
+
     constructor() {
         this.partnerTable = database.getTable("partner")
     }
 
-    async getAllPartner() {
+    async getAll() {
 
         let partnerList = await genericDAO.getAll(this.partnerTable.name);
 
@@ -21,19 +22,6 @@ class PartnerDao{
 
     async getPartnerById(id) {
         return genericDAO.getById(this.partnerTable.name, id);
-    }
-
-
-    async getPartnerCompany() {
-
-        let partnerList = await genericDAO.getAll(this.partnerTable.name);
-
-         let partnerFound = partnerList.filter((item) => {
-             return (item[1] === "NewHard");
-        })
-
-        let item = partnerFound[0];
-        return  new PartnerDTO(item);
     }
 
 }
