@@ -25,7 +25,7 @@ class SaleService{
 
             productDTO.quantity = newQuantity;
 
-            Logger.log("[saleService] product ", JSON.stringify(productDTO));
+            Logger.log("[saleService] stock ", JSON.stringify(productDTO));
 
             let productArrayValues = [ productDTO.id,
                                        productDTO.name,

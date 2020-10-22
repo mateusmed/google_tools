@@ -16,9 +16,17 @@ class GenericDao {
         let ws = ss.getSheetByName(from);
 
         let list =  ws.getDataRange().getValues();
+
+        Logger.log(`======> get item from [${JSON.stringify(from)}] 
+                                        columnId [${JSON.stringify(columnId)}]
+                                        value [${value}]
+                                        list [${list}]`);
+
         let find = list.filter((item) => {
             return (item[columnId] == value);
         })
+
+        Logger.log(`======> get find [${JSON.stringify(find)}]`);
 
         return find;
     }
@@ -92,7 +100,8 @@ class GenericDao {
     //TODO esta atualizando pelo index, tem q atualizar pelo id do objeto
     async updateItem(from, item, numColumns){
 
-        Logger.log(`======> update item from [${JSON.stringify(from)}] item [${JSON.stringify(item)}] numColumns [${numColumns}]`);
+        Logger.log(`======> update item from [${JSON.stringify(from)}] 
+                    item [${JSON.stringify(item)}] numColumns [${numColumns}]`);
 
         let ss = SpreadsheetApp.openByUrl(database.urlDatabase);
         let ws = ss.getSheetByName(from);

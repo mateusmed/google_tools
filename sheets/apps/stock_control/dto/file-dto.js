@@ -20,16 +20,41 @@ class CompanyDTO {
     }
 }
 
+
+class EntityDTO {
+
+    constructor(entity) {
+
+        let entityTable = database.getTable("entity");
+
+        this.id = entity[entityTable.columns.indexOf("id")];
+        this.name = entity[entityTable.columns.indexOf("name")];
+        this.type = entity[entityTable.columns.indexOf("type")];
+    }
+}
+
 class ProductDTO {
-    constructor(product, company) {
+
+    constructor(product, entity) {
         let productTable = database.getTable("product");
 
         this.id = product[productTable.columns.indexOf("id")];
         this.name = product[productTable.columns.indexOf("name")];
-        this.quantity = product[productTable.columns.indexOf("quantity")];
-        this.purchaseUnitPrice  = product[productTable.columns.indexOf("purchase_unit_price")];
-        this.estimatedUnitSalePrice = product[productTable.columns.indexOf("estimated_unit_sale_price")];
-        this.description  = product[productTable.columns.indexOf("description")];
+        this.description = product[productTable.columns.indexOf("description")];
+        this.category = entity;
+    }
+}
+
+class StockDTO {
+    constructor(product, company) {
+        let stockTable = database.getTable("stock");
+
+        this.id = product[stockTable.columns.indexOf("id")];
+        this.name = product[stockTable.columns.indexOf("name")];
+        this.quantity = product[stockTable.columns.indexOf("quantity")];
+        this.purchaseUnitPrice  = product[stockTable.columns.indexOf("purchase_unit_price")];
+        this.estimatedUnitSalePrice = product[stockTable.columns.indexOf("estimated_unit_sale_price")];
+        this.description  = product[stockTable.columns.indexOf("description")];
         this.company = company;
     }
 }

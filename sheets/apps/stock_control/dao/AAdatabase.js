@@ -5,19 +5,23 @@ class AAdatabase {
     constructor() {
         this.urlDatabase = "https://docs.google.com/spreadsheets/d/1i2NOiagih_MhBoxClr59Lmecux7HatknkZmTFb22YU8/edit#gid=0"
         this.tables = {
+
+            "entity":["id",
+                      "name",
+                      "type"],
+
             "product": ["id",
                         "name",
-                        "quantity",
-                        "purchase_unit_price",
-                        "estimated_unit_sale_price",
                         "description",
-                        "id_company"],
+                        "id_category"],
 
-            "partner": ["id",
-                        "name"],
-
-            "company": ["id",
-                        "name"],
+            "stock": ["id",
+                      "id_product",
+                      "id_status",
+                      "quantity",
+                      "purchase_unit_price",
+                      "description",
+                      "date"],
 
             "investment": ["id",
                            "id_partner",

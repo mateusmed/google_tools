@@ -25,7 +25,7 @@ async function saleHtmlBuilded(productId, productName, qtd){
         return Promise.all(salePage);
     }
 
-    Logger.log("Sale product: ", JSON.stringify(productId));
+    Logger.log("Sale stock: ", JSON.stringify(productId));
 
     salePage.push(headerMenu());
     salePage.push("<br/>");

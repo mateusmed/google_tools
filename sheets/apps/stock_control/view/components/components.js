@@ -3,7 +3,18 @@ async function messageBox(){
   return '<div id="message-box"></div>';
 }
 
+/*
 
+primary
+secondary
+success
+danger
+warning
+info
+light
+dark
+
+*/
 async function renderMessageResponse(typeAlert, message){
 
     return `<div class="alert alert-${typeAlert}" role="alert">
@@ -20,7 +31,7 @@ async function selectItem(id, label, itens, selected){
     selectItem.push(`<select class="browser-default custom-select" name="${id}" id="${id}">`);
 
     if(selected === undefined){
-        selectItem.push(`<option>Escolha a empresa</option>`);
+        selectItem.push(`<option>Select</option>`);
     }
 
     for(let item of itens){
@@ -68,12 +79,18 @@ async function headerMenu(page){
   
   let mainText = "NEW HARD";
 
-  let product = currentUrl() + "/product";
+  let newProduct = currentUrl() + "/newProduct";
+  let buyProduct = currentUrl() + "/buyProduct";
+  let listProduct = currentUrl() + "/listProduct";
+
+  let stock = currentUrl() + "/stock";
+
   let sale = currentUrl() + "/sale";
   let statistic = currentUrl() + "/statistic";
   let payment = currentUrl() + "/payment";
   let consultation = currentUrl() + "/consultation";
   let investment = currentUrl() + "/investment";
+
 
   let headerMenuList = `<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
                         <a class="navbar-brand" href="${currentUrl()}">${mainText}</a>
@@ -82,7 +99,7 @@ async function headerMenu(page){
                                data-toggle="collapse" 
                                data-target="#navbarNav" 
                                aria-controls="navbarNav" 
-                               aria-expanded="false" 
+                               aria-expanded="false"
                                aria-label="Toggle navigation">
                                <span class="navbar-toggler-icon"></span>
                        </button>
@@ -90,11 +107,21 @@ async function headerMenu(page){
                             id="navbarNav">
                        <ul class="navbar-nav">
       
-           <li class="nav-item {new-product}">
-               <a class="nav-link" href="${product}">Novo Produto </a>
-           </li>
-          <li class="nav-item {sale}">
-             <a class="nav-link" href="${sale}"> Vendas </a>
+          <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Produto
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="${listProduct}">Lista de produtos</a>
+                      <a class="dropdown-item" href="${newProduct}">Novo Produto</a>                      
+                      <a class="dropdown-item" href="${buyProduct}">Comprar produto</a>
+                </div>
+          </li>
+          <li class="nav-item {new-product}">
+               <a class="nav-link" href="${stock}">Estoque/vendas </a>
+          </li>
+          <li class="nav-item {new-product}">
+               <a class="nav-link" href="${sale}">Historico de vendas </a>
           </li>
           <li class="nav-item {statistic}">
              <a class="nav-link" href="${statistic}">Estatistica</a>
@@ -105,9 +132,7 @@ async function headerMenu(page){
           <li class="nav-item {statistic}">
              <a class="nav-link" href="${payment}">Pagamento</a>
           </li>
-          <li class="nav-item {statistic}">
-             <a class="nav-link" href="${consultation}">Consulta Online</a>
-          </li>
+          
        </ul>
        </div>
     </nav>`;
@@ -118,7 +143,7 @@ async function headerMenu(page){
 
 
 //todo [refactory] -  criar uma tabela generica
-async function tableProduct(itemList, headerList){
+async function tableProduct(headerList, itemList){
 
    let itemMatriz = await itemList;
   
@@ -146,35 +171,33 @@ async function tableProduct(itemList, headerList){
           </thead> 
         <tbody>`);
 
-
    for(let item of itemList){
       
-      let editDestiny = currentUrl() + "/product?id="+ item.id;
+      let editDestiny = currentUrl() + "/stock?id="+ item.id;
       let saleDestiny = currentUrl() + `/sale?productId=${item.id}&productName=${item.name}&qtd=${item.quantity}`;
      
-      table.push(
-      `<tr>
-           <td> ${item.id} </td> 
-           <td> ${item.name} </td>
-           <td> ${item.quantity} </td>
-           <td> ${item.purchaseUnitPrice} </td>
-           <td> ${item.estimatedUnitSalePrice} </td> 
-           <td> ${item.description} </td>
-           <td> ${item.company.name} </td>
-           <td> 
-           
-           <div class="btn-group">
-                <a class="btn btn-outline-primary" href="${editDestiny}" role="button">
-                   Editar
-                </a>
-                <a class="btn btn-outline-primary" href="${saleDestiny}" role="button">
-                   Vendemos
-                </a>
-            </div>
-            
-           </td> 
-       </tr> `
-      );
+      table.push(`<tr>`);
+
+       for(let attribute in item){
+
+           if(typeof(item[attribute]) === "object"){
+               let obj = item[attribute];
+               table.push(`<td> ${obj.name} </td>`);
+           }else{
+               table.push(`<td> ${item[attribute]} </td>`);
+           }
+       }
+
+       table.push(`<td>
+                       <div class="btn-group">
+                           <a class="btn btn-outline-primary" href="${editDestiny}" role="button">
+                               Editar
+                           </a>
+                       </div>
+                  </td>`);
+
+      table.push(`</tr>`);
+
     }
     
     table.push( ` </tr> 

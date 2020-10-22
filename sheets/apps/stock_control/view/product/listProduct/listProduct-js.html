@@ -1,0 +1,48 @@
+
+<script>
+
+    $(function() {
+        google.script.run.withSuccessHandler(renderProductPage).listProductHtmlBuilded();
+    });
+
+    function renderProductPage(html) {
+    
+       var productPage = $('#product');
+       productPage.html(html);
+       document.getElementById("save").addEventListener("click", save);
+    }
+    
+    function getDataForm(){
+
+        let id = $("#id").val();
+        let name = $("#name").val();
+        let description = $("#description").val();
+
+        let categoryId = $('#category').find(":selected").val();
+
+        return {
+            "id": id,
+            "name": name,
+            "description": description,
+            "categoryId":categoryId
+        };
+    }
+
+
+     function save(){
+
+        cleanMessageBox()
+
+        let data = getDataForm();
+        alert(JSON.stringify(data));
+
+        //TODO  deixar claro que ao criar um novo produto o valor do produto é imutavel
+
+        google.script.run.withSuccessHandler(createMessageResponse).saveOrUpdateProduct(data);
+
+     }
+
+    
+</script>
+
+
