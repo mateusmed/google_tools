@@ -7,8 +7,14 @@
 
     function renderProductPage(html) {
     
-       var productPage = $('#product');
+       let productPage = $('#listProduct');
        productPage.html(html);
+
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+
        document.getElementById("save").addEventListener("click", save);
     }
     

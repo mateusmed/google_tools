@@ -142,7 +142,6 @@ async function headerMenu(page){
 
 
 
-//todo [refactory] -  criar uma tabela generica
 async function tableProduct(headerList, itemList){
 
    let itemMatriz = await itemList;
@@ -173,8 +172,8 @@ async function tableProduct(headerList, itemList){
 
    for(let item of itemList){
       
-      let editDestiny = currentUrl() + "/stock?id="+ item.id;
-      let saleDestiny = currentUrl() + `/sale?productId=${item.id}&productName=${item.name}&qtd=${item.quantity}`;
+      let editDestiny = currentUrl() + "/newProduct?id="+ item.id;
+      // let saleDestiny = currentUrl() + `/sale?productId=${item.id}&productName=${item.name}&qtd=${item.quantity}`;
      
       table.push(`<tr>`);
 
@@ -200,7 +199,7 @@ async function tableProduct(headerList, itemList){
 
     }
     
-    table.push( ` </tr> 
+    table.push( `  
                   </tbody> 
                   </table>
                   </div>`);

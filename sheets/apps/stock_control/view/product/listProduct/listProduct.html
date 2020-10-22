@@ -9,21 +9,27 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    
+
+    <!-- Material Design Bootstrap -->
+    <!-- cdn datatable css jquery -->
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <base target="_top">
     <?!= include("view/components/spinner-css"); ?>
   </head>
   <body>
   
-    <div id="product">
+    <div id="listProduct">
           <div class="loader">
           </div>       
     </div>
-    
+
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- cdn datatable js jquery -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
     <!-- this script need to be here to foward productId variable-->
     <!-- when render another file the context is lost, this need to be here-->

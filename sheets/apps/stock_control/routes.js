@@ -14,10 +14,7 @@ function doGet(event) {
       return renderProductTabPage("buyProduct");
 
     case "newProduct":
-      return renderProductTabPage("newProduct");
-
-    case "stock":
-      return stockPage(event);
+      return newProductPage(event);
 
     case "sale":
       return salePage(event);
@@ -39,16 +36,16 @@ function doGet(event) {
   }
 }
 
-function stockPage(event){
-  let productPage = getPage("view/stock/stock");
+function newProductPage(event){
+  let newProductPage = getPage("view/product/newProduct/newProduct");
 
   if(event.parameters["id"] === undefined){
-    productPage["productId"] = "null";
+    newProductPage["productId"] = "null";
   }else{
-    productPage["productId"] = event.parameters["id"];
+    newProductPage["productId"] = event.parameters["id"];
   }
 
-  return productPage.evaluate();
+  return newProductPage.evaluate();
 }
 
 function salePage(event){

@@ -1,18 +1,31 @@
 
-async function newProductHtmlBuilded(){
+async function newProductHtmlBuilded(productId){
 
   let newProductPage = [];
 
   let categoryList = await productService.getAllCategoryProducts();
 
+  if(productId === undefined){
+
+    newProductPage.push(headerMenu());
+    newProductPage.push("<br/>");
+    newProductPage.push(formNewProduct(categoryList));
+
+    return Promise.all(newProductPage);
+  }
+
+
+  let product = await productService.getProductById(productId);
+
   newProductPage.push(headerMenu());
   newProductPage.push("<br/>");
-  newProductPage.push(formNewProduct(categoryList));
-  
+  newProductPage.push(formNewProduct(categoryList, product));
+
   return Promise.all(newProductPage);
+
 }
 
-async function formNewProduct(categoryList){
+async function formNewProduct(categoryList, product){
 
   let form = [];
 
@@ -20,21 +33,19 @@ async function formNewProduct(categoryList){
     
                   ${await messageBox()}
             
-                  <h4>Produto:</h4>  
-                
-                  <div class="form-group-father">
-                    ${await input("", "hidden", "id", "", "disabled")}
-                    ${await input("Nome", "text", "name", "")}
-                    ${await input("Descrição", "text", "description", "")}  
-             `);
+                  <h4>Produto:</h4>`);
 
-    form.push(`${await selectItem("category", "Escolha uma categoria", categoryList)}
+    form.push(`<div class="form-group-father">
+                    ${await input("", "hidden", "id", product.id, "disabled")}
+                    ${await input("Nome", "text", "name", product.name)}
+                    ${await input("Descrição", "text", "description", product.description)}`);
+
+    form.push(`${await selectItem("category", "Escolha uma categoria", categoryList, product.category)}
                <br/>`);
 
-    form.push(`
-        <br/>
-        ${await button("save", "salvar")} 
-      </div>`)
+    form.push(` <br/>
+                    ${await button("save", "salvar")} 
+              </div>`)
 
     form.push(` `)
 

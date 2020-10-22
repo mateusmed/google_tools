@@ -2,7 +2,7 @@
 <script>
 
     $(function() {
-        google.script.run.withSuccessHandler(renderProductPage).newProductHtmlBuilded();
+        google.script.run.withSuccessHandler(renderProductPage).newProductHtmlBuilded(productId);
     });
 
     function renderProductPage(html) {
@@ -35,8 +35,6 @@
 
         let data = getDataForm();
         alert(JSON.stringify(data));
-
-        //TODO  deixar claro que ao criar um novo produto o valor do produto é imutavel
 
         google.script.run.withSuccessHandler(createMessageResponse).saveOrUpdateProduct(data);
 

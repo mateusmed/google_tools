@@ -29,12 +29,25 @@ class ProductDao{
         return productDTOList;
     }
 
-    async getPartnerById(id) {
-        return genericDAO.getById(this.productTable.name, id);
+    async getProductById(id) {
+
+        let categoryIndex = this.productTable.columns.indexOf("id_category");
+
+        let product = await genericDAO.getById(this.productTable.name, id);
+        let category = await entityDao.getById(product[categoryIndex]);
+
+        return new ProductDTO(product, category)
     }
 
     async saveProduct(productArrayValues){
         await genericDAO.createItem(this.productTable.name,
+                                    productArrayValues,
+                                    this.productTable.columns.length);
+    }
+
+
+    async updataProduct(productArrayValues){
+        await genericDAO.updateItem(this.productTable.name,
                                     productArrayValues,
                                     this.productTable.columns.length);
     }

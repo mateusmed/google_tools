@@ -8,15 +8,24 @@ class ProductService{
         return await productDao.getAll();
     }
 
+    async getProductById(id){
+        return await productDao.getProductById(id);
+    }
 
-    async createNewProduct(data){
 
-        let productArrayValues = [data.id,
-                                  data.name,
-                                  data.description,
-                                  data.categoryId]
+    async buildArray(data){
+        return [data.id,
+                data.name,
+                data.description,
+                data.categoryId]
+    }
 
-        await productDao.saveProduct(productArrayValues);
+    async updateNewProduct(array){
+        await productDao.updataProduct(array);
+    }
+
+    async createNewProduct(array){
+        await productDao.saveProduct(array);
     }
 
     async saveOrUpdateNewProductForm(data){
@@ -24,15 +33,24 @@ class ProductService{
         try{
             Logger.log("[productService] received data ", JSON.stringify(data));
 
+            let productArrayValues = await this.buildArray(data);
+
             if(data.companyId === "Select"){
                 return await renderMessageResponse("warning",
                                             `Selecione uma opção`);
             }
 
-            await this.createNewProduct(data);
+            if(data.id === "" || data.id === undefined){
+
+                await this.createNewProduct(productArrayValues);
+                return await renderMessageResponse("primary",
+                    `Salvo com sucesso`);
+            }
+
+            await this.updateNewProduct(productArrayValues);
 
             return await renderMessageResponse("primary",
-                                         `Salvo com sucesso`);
+                `Salvo com sucesso`);
 
         }catch (error){
 
