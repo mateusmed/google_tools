@@ -18,12 +18,15 @@ async function pcBuildedHtmlBuilded() {
 
     let pcBuildedPage = [];
 
-    let response = await myFunction();
+    let sites = rocketService.sites;
+    Logger.log('sites --> ', sites);
+
+    let response = await rocketService.getItems(sites.boadica);
     Logger.log('response --> ', response);
 
     pcBuildedPage.push(headerMenu());
     pcBuildedPage.push("<br/>");
-    pcBuildedPage.push(response);
+    pcBuildedPage.push(JSON.stringify(response));
 
     return Promise.all(pcBuildedPage);
 }

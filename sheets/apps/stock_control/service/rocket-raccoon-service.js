@@ -13,21 +13,24 @@ var requestPromise = require('../lib/request-promise');
 
 class RocketRaccoonService{
 
-    /*
-    config = {
-            name: "boadica",
-            host: "https://www.boadica.com.br",
-            page: "/pesquisa/cpu_plmae/precos?ClasseProdutoX=5&CodCategoriaX=13&XT=2&XE=2&XG=4",
-            content: "div.row.preco.detalhe",
-            item: {
-                name: "div.pull-left",
-                price: "div.col-md-1.preco",
-                description: "div.col-md-4.center",
-                link: "div.col-md-4.center;div.no-mobile;a"
-            },
-            incrementPage: 1,
-            numberOfPage: 1
+    constructor() {
+        this.sites = {
+            "boadica": {
+                "name": "boadica",
+                "host": "https://www.boadica.com.br",
+                "page": "/pesquisa/cpu_plmae/precos?ClasseProdutoX=5&CodCategoriaX=13&XT=2&XE=2&XG=4",
+                "content": "div.row.preco.detalhe",
+                "item": {
+                    "name": "div.pull-left",
+                    "price": "div.col-md-1.preco",
+                    "description": "div.col-md-4.center",
+                    "link": "div.col-md-4.center;div.no-mobile;a"
+                },
+                "incrementPage": 1,
+                "numberOfPage": 1
+            }
         }
+    }
 
 
     buildPage(site, numberOfPage) {
@@ -71,8 +74,10 @@ class RocketRaccoonService{
 
     async getItems(site){
 
-        let responseHtml = await requestPromise(site.url);
-        let $ = cheerio.load(responseHtml);
+        let url = site.host.concat(site.page);
+
+        let responseHtml = await this.getContent_(url);
+        let $ = Cheerio.load(responseHtml);
 
         let list = [];
         let itemData = site.item;
@@ -82,10 +87,10 @@ class RocketRaccoonService{
             let $el = $(el);
             let item = {};
 
-            item["name"] = this.clean($el.find(itemData.name).text());
-            item["price"] = this.regexRealPrice(clean($el.find(itemData.price).text()));
-            item["description"] = this.clean($el.find(itemData.description).text());
-            item["link"] = this.buildLink(site, $el);
+            //item["name"] = this.clean($el.find(itemData.name).text());
+            item["price"] = this.regexRealPrice(this.clean($el.find(itemData.price).text()));
+            //item["description"] = this.clean($el.find(itemData.description).text());
+            //item["link"] = this.buildLink(site, $el);
 
             list.push(item);
         });
@@ -113,11 +118,19 @@ class RocketRaccoonService{
     }
 
 
- */
+    async getContent_(url) {
+        return UrlFetchApp.fetch(url).getContentText()
+    }
 
     async request_simples(){
-        let response = UrlFetchApp.fetch('https://jsonplaceholder.typicode.com/posts', {'muteHttpExceptions': true});
-        Logger.log('response ', response);
+        const content = await this.getContent_('https://www.boadica.com.br/pesquisa/cpu_plmae/precos?ClasseProdutoX=5&CodCategoriaX=13&XT=2&XE=2&XG=4');
+        const $ = Cheerio.load(content);
+
+        let texto = $('#mp-right').text()
+
+        Logger.log(texto);
+
+        return texto;
     }
 
 }
