@@ -8,7 +8,7 @@ class PartnerDTO {
         this.name = partner[partnerTable.columns.indexOf("name")];
     }
 }
-
+//comentario idiota
 class CompanyDTO {
 
     constructor(company) {
