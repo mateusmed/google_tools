@@ -10,6 +10,9 @@ function doGet(event) {
     case "listProduct":
       return renderProductTabPage("listProduct");
 
+    case "pcBuilded":
+      return renderPage("pcBuilded");
+
     case "buyProduct":
       return renderProductTabPage("buyProduct");
 

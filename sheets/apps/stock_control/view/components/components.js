@@ -91,8 +91,11 @@ async function headerMenu(page){
   let consultation = currentUrl() + "/consultation";
   let investment = currentUrl() + "/investment";
 
+  let pcBuilded = currentUrl() + "/pcBuilded";
 
-  let headerMenuList = `<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+
+
+    let headerMenuList = `<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
                         <a class="navbar-brand" href="${currentUrl()}">${mainText}</a>
                        <button class="navbar-toggler" 
                                type="button" 
@@ -127,10 +130,13 @@ async function headerMenu(page){
              <a class="nav-link" href="${statistic}">Estatistica</a>
           </li>
           <li class="nav-item {statistic}">
-             <a class="nav-link" href="${investment}">Investmento</a>
+             <a class="nav-link" href="${investment}">Investimento</a>
           </li>
           <li class="nav-item {statistic}">
              <a class="nav-link" href="${payment}">Pagamento</a>
+          </li>          
+          <li class="nav-item {statistic}">
+             <a class="nav-link" href="${pcBuilded}">Pcs montados</a>
           </li>
           
        </ul>
