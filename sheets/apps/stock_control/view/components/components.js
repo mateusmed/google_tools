@@ -148,7 +148,7 @@ async function headerMenu(page){
 
 
 
-async function tableProduct(headerList, itemList){
+async function tableEditItem(headerList, itemList, destinyUrl){
 
    let itemMatriz = await itemList;
   
@@ -178,9 +178,11 @@ async function tableProduct(headerList, itemList){
 
    for(let item of itemList){
       
-      let editDestiny = currentUrl() + "/newProduct?id="+ item.id;
+      // let editDestiny = currentUrl() + "/newProduct?id="+ item.id;
       // let saleDestiny = currentUrl() + `/sale?productId=${item.id}&productName=${item.name}&qtd=${item.quantity}`;
-     
+
+       let editDestiny = currentUrl() + `${destinyUrl}${item.id}`;
+
       table.push(`<tr>`);
 
        for(let attribute in item){

@@ -10,7 +10,8 @@ class RocketRaccoonService{
                     "price": "div.col-md-1.preco",
                     "description": "div.col-md-4.center",
                     "link": "div.col-md-4.center;div.no-mobile;a"
-                }
+                },
+                "limitItens": "5"
         }
     }
 
@@ -18,6 +19,7 @@ class RocketRaccoonService{
         return element.replace(/\s+/g,' ').trim();
     }
 
+    //todo extrair apenas numericos
     regexRealPrice(price){
 
         let found = price.match(new RegExp('R\\$:[\\t ]*((\\d{1,3}\\.?)+(,\\d{2})?)'));
@@ -35,6 +37,18 @@ class RocketRaccoonService{
         return price;
     }
 
+    cleanPrice(price){
+
+        let newPrice = price.replace("R$ ", "");
+            newPrice = newPrice.replace(".", "");
+            newPrice = newPrice.replace(",", ".");
+
+
+        Logger.log('return new price -> ', newPrice);
+        return newPrice;
+    }
+
+
     async getContent_(url) {
         return UrlFetchApp.fetch(url).getContentText()
     }
@@ -48,14 +62,16 @@ class RocketRaccoonService{
         let list = [];
         let itemData = this.config.item;
 
+        let limitItens = this.config.limitItens;
+
         $(this.config.content).each((idx, el) => {
 
-            let $el = $(el);
-            let item = {};
-
-            item["price"] = this.regexRealPrice(this.clean($el.find(itemData.price).text()));
-
-            list.push(item);
+            Logger.log('idx -> ', idx);
+            if(idx < limitItens){
+                let $el = $(el);
+                let price = this.cleanPrice(this.clean($el.find(itemData.price).text()));
+                list.push(price);
+            }
         });
 
         return list;

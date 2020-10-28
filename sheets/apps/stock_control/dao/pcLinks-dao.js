@@ -8,16 +8,14 @@ class PcLinksDao{
 
     async getById(id) {
 
-        let pcLinksList = await genericDAO.getById(this.pcBuilded.name, id);
+        let idIndex = this.pcBuilded.columns.indexOf("id_pcBuilded");
+        let linkIndex = this.pcBuilded.columns.indexOf("link");
 
-        let linkList = []
+        let pcLinks = await genericDAO.getWhenColumnEqualValue(this.pcBuilded.name, idIndex, id);
 
-        for (let pcLink of pcLinksList){
-            await linkList.push(pcLink[2]);
-        }
-
-        Logger.log("partners: " + JSON.stringify(linkList));
-        return linkList;
+        return await pcLinks.map((pcLink) => {
+                    return pcLink[linkIndex];
+                })
     }
 
 

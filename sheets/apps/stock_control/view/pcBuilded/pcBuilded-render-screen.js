@@ -1,16 +1,31 @@
 
-async function pcBuildedHtmlBuilded() {
+async function pcBuildedHtmlBuilded(pcBuildedId) {
 
     Logger.log('pcBuildedHtmlBuilded init');
 
     let pcBuildedPage = [];
 
-    let itens = await pcBuildedService.allPcBuilded();
+    if(pcBuildedId === undefined){
 
-    pcBuildedPage.push(headerMenu());
-    pcBuildedPage.push("<br/>");
-    pcBuildedPage.push(JSON.stringify(itens));
+        await pcBuildedService.getPcBuildedById(123);
 
-    return Promise.all(pcBuildedPage);
+        let pcBuilded = await pcBuildedService.getAllPcBuilded();
+
+        let headerList = ["id",
+                          "name",
+                          "action"];
+
+        let destinyUrl = "/pcBuilded?id=";
+
+        pcBuildedPage.push(headerMenu());
+        pcBuildedPage.push("<br/>");
+        pcBuildedPage.push(tableEditItem(headerList, pcBuilded, destinyUrl));
+
+        return Promise.all(pcBuildedPage);
+    }
+
+
+
+
 }
 

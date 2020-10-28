@@ -32,8 +32,6 @@ class EntityDao{
                                                                   typeIndex,
                                                                   type);
 
-        Logger.log(`======> entityList [${JSON.stringify(entityList)}]`);
-
         let entityDTOList = [];
 
         for (let entity of entityList){

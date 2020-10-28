@@ -7,10 +7,16 @@ class PcBuildedDTO {
 
         this.id = pc[partnerTable.columns.indexOf("id")];
         this.name = pc[partnerTable.columns.indexOf("name")];
-        this.links = links;
+        this.itens = links;
         this.costValue = undefined;
     }
 }
+
+// let visao = {
+//                 "id": "",
+//                 "name": "",
+//                 "itens": ""
+//             }
 
 
 class PartnerDTO {
@@ -23,7 +29,7 @@ class PartnerDTO {
         this.name = partner[partnerTable.columns.indexOf("name")];
     }
 }
-//comentario idiota
+
 class CompanyDTO {
 
     constructor(company) {
