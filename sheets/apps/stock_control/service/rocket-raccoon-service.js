@@ -11,7 +11,7 @@ class RocketRaccoonService{
                     "description": "div.col-md-4.center",
                     "link": "div.col-md-4.center;div.no-mobile;a"
                 },
-                "limitItens": "5"
+                "limitItens": 5
         }
     }
 
@@ -66,14 +66,17 @@ class RocketRaccoonService{
 
         $(this.config.content).each((idx, el) => {
 
-            Logger.log('idx -> ', idx);
-            if(idx < limitItens){
-                let $el = $(el);
-                let price = this.cleanPrice(this.clean($el.find(itemData.price).text()));
-                list.push(price);
+            if(idx === limitItens) {
+                // equivalente ao braak no jquery
+                return false;
             }
+
+            let $el = $(el);
+            let price = this.cleanPrice(this.clean($el.find(itemData.price).text()));
+            list.push(price);
         });
 
+        Logger.log('list -> ', list);
         return list;
     }
 
