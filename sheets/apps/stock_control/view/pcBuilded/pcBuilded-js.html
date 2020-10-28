@@ -1,31 +1,9 @@
 <script>
 
     $(function () {
-        google.script.run.withSuccessHandler(renderIndex).pcBuildedHtmlBuilded();
+        google.script.run.withSuccessHandler(renderIndex).pcBuildedHtmlBuilded(pcBuildedId);
     });
 
-
-        /*
-    function httpGet(){
-
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open( "GET", "https://www.boadica.com.br/pesquisa/cpu_plmae/precos?ClasseProdutoX=5&CodCategoriaX=13&XT=2&XE=2&XG=4", false ); // false for synchronous request
-        xmlHttp.send( null );
-
-        let content = xmlHttp.responseText;
-
-
-        $('#boadica').append($(content));
-        $('#boadica').hide();
-
-        let a = $('#boadica').find("col-md-1").text();
-
-        alert(content);
-
-        return xmlHttp.responseText;
-    }
-
-         */
 
     function renderIndex(html) {
 

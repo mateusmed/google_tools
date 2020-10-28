@@ -11,7 +11,7 @@ function doGet(event) {
       return renderProductTabPage("listProduct");
 
     case "pcBuilded":
-      return renderPage("pcBuilded");
+      return newPcbuildedPage(event);
 
     case "buyProduct":
       return renderProductTabPage("buyProduct");
@@ -49,6 +49,18 @@ function newProductPage(event){
   }
 
   return newProductPage.evaluate();
+}
+
+function newPcbuildedPage(event){
+  let newPcbuildedPage = getPage("view/pcBuilded/pcBuilded");
+
+  if(event.parameters["id"] === undefined){
+    newPcbuildedPage["pcBuildedId"] = "null";
+  }else{
+    newPcbuildedPage["pcBuildedId"] = event.parameters["id"];
+  }
+
+  return newPcbuildedPage.evaluate();
 }
 
 function salePage(event){

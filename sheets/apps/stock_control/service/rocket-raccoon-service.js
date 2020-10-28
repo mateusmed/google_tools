@@ -43,8 +43,6 @@ class RocketRaccoonService{
             newPrice = newPrice.replace(".", "");
             newPrice = newPrice.replace(",", ".");
 
-
-        Logger.log('return new price -> ', newPrice);
         return newPrice;
     }
 

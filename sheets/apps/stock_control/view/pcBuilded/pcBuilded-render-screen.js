@@ -1,13 +1,11 @@
 
 async function pcBuildedHtmlBuilded(pcBuildedId) {
 
-    Logger.log('pcBuildedHtmlBuilded init');
+    Logger.log(`pcBuildedHtmlBuilded init - ${pcBuildedId}`);
 
     let pcBuildedPage = [];
 
-    if(pcBuildedId === undefined){
-
-        await pcBuildedService.getPcBuildedById(123);
+    if(pcBuildedId === undefined || pcBuildedId == "null"){
 
         let pcBuilded = await pcBuildedService.getAllPcBuilded();
 
@@ -25,7 +23,13 @@ async function pcBuildedHtmlBuilded(pcBuildedId) {
     }
 
 
+    let itens =  await pcBuildedService.getPcBuildedById(pcBuildedId);
 
+    pcBuildedPage.push(headerMenu());
+    pcBuildedPage.push("<br/>");
+    pcBuildedPage.push(itens);
+
+    return Promise.all(pcBuildedPage);
 
 }
 

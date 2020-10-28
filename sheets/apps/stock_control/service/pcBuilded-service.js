@@ -6,6 +6,8 @@ class PcBuildedService {
 
         let pcBuildedList = await entityDao.getEntityByType("pcBuilded");
 
+
+
         return pcBuildedList.map((item) => {
             delete item["type"];
             return item;
