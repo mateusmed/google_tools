@@ -15,6 +15,9 @@ class AAdatabase {
                         "description",
                         "id_category"],
 
+            "pcLinks": ["id_pcBuilded",
+                        "link"],
+
             "stock": ["id",
                       "id_product",
                       "id_status",

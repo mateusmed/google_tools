@@ -1,3 +1,18 @@
+
+class PcBuildedDTO {
+
+    constructor(pc, links) {
+
+        let partnerTable = database.getTable("partner");
+
+        this.id = pc[partnerTable.columns.indexOf("id")];
+        this.name = pc[partnerTable.columns.indexOf("name")];
+        this.links = links;
+        this.costValue = undefined;
+    }
+}
+
+
 class PartnerDTO {
 
     constructor(partner) {
