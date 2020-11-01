@@ -1,22 +1,13 @@
 
 class PcBuildedDTO {
 
-    constructor(pc, links) {
-
-        let partnerTable = database.getTable("partner");
-
-        this.id = pc[partnerTable.columns.indexOf("id")];
-        this.name = pc[partnerTable.columns.indexOf("name")];
-        this.itens = links;
-        this.costValue = undefined;
+    constructor(pc, links, costValue) {
+        this.id = pc.id;
+        this.name = pc.name;
+        this.links = links;
+        this.costValue = costValue;
     }
 }
-
-// let visao = {
-//                 "id": "",
-//                 "name": "",
-//                 "itens": ""
-//             }
 
 
 class PartnerDTO {

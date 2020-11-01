@@ -1,11 +1,11 @@
 <script>
 
     $(function () {
-        google.script.run.withSuccessHandler(renderIndex).pcBuildedHtmlBuilded(pcBuildedId);
+        google.script.run.withSuccessHandler(renderPcBuilded).pcBuildedHtmlBuilded(pcBuildedId);
     });
 
 
-    function renderIndex(html) {
+    function renderPcBuilded(html) {
 
         var index = $('#pcBuilded');
         index.html(html);
@@ -14,8 +14,23 @@
             $('#dtBasicExample').DataTable();
             $('.dataTables_length').addClass('bs-select');
         });
+
+        document.getElementById("calc").addEventListener("click", calc);
+
     }
 
+    function calc(){
+        let costValue = $("#costValue").text();
+        let percent = $("#percent").val();
+
+        let addPercent = (Number(costValue) * Number(percent)) /  100;
+
+        let result = Number(costValue) + addPercent;
+        alert(result);
+
+        $('#result').val(result);
+
+    }
 
     document.getElementById("btn").addEventListener("click", create);
 

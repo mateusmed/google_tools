@@ -146,7 +146,38 @@ async function headerMenu(page){
     return headerMenuList.replace(`{${page}}`, "active")
 }
 
+async function simpleTableHref(headerList, itemList){
 
+    let table = [];
+
+    table.push(`<table class="table">
+                      <thead>
+                        <tr>`)
+
+              headerList.map((item) => {
+                  table.push(`<th scope="col"> ${item} </th>`);
+              });
+
+            table.push(`</tr>
+                      </thead> 
+          
+          <tbody>`);
+
+            for(let item of itemList) {
+
+                table.push(`<tr>`);
+
+                table.push(`<td> <a href=${item.link}  target="_blank"> ${item.link}</a></td>`);
+                table.push(`<td> ${item.cost} </td>`);
+
+                table.push(`</tr>`);
+            }
+
+            table.push(`</tbody>
+                        </table>`);
+
+    return table.join("");
+}
 
 async function tableEditItem(headerList, itemList, destinyUrl){
 
