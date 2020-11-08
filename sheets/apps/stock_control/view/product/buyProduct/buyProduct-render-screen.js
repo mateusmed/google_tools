@@ -1,39 +1,46 @@
 
-async function buyProductHtmlBuilded(){
+async function buyProductHtmlBuilded(productId){
 
   let buyProductPage = [];
 
-  let categoryList = await productService.getAllCategoryProducts();
-  let productList = await productService.getAllProducts();
+  let product = await productService.getProductById(productId);
+  let status =  await productService.getProductStatus();
+
 
   buyProductPage.push(headerMenu());
   buyProductPage.push("<br/>");
-  buyProductPage.push(formBuyProduct(categoryList, productList));
+  buyProductPage.push(formBuyProduct(product, status));
   
   return Promise.all(buyProductPage);
 }
 
-async function formBuyProduct(categoryList, productList){
+async function formBuyProduct(product, status){
 
   let form = [];
 
-  form.push(`<div class="container">
+  form.push(`<div class="container"> 
     
                   ${await messageBox()}
             
-                  <h4>Compra:</h4>
+                  <h4>Compra ${product.name}:</h4>
              `);
 
-    form.push(`${await selectItem("category", "Escolha uma categoria", categoryList)}
+    form.push(`
                <br/>
-               <br/>`);
-
-    form.push(`${await selectItem("product", "Escolha um produto", productList)}
+                    ${await input("", "hidden", "id", product.id)}
+                    
+               <br/>
+                    ${await selectItem("status", "Status", status , "")}
+               <br/>     
+               <br/>
+                    ${await input("Quantidade", "number", "qtd", "")}
+               <br/>
+                    ${await input("Valor", "number", "value", "")}
                <br/>`);
 
     form.push(`
         <br/>
-        ${await button("save", "salvar")} 
+        ${await button("save", "Comprar")} 
       </div>`)
 
     form.push(` `)

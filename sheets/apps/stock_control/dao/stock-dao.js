@@ -2,27 +2,29 @@
 class StockDao{
 
     constructor() {
-        this.productTable = database.getTable("product");
+        this.stockTable = database.getTable("stock");
     }
+
 
     async getAll() {
 
-        let productList = await genericDAO.getAll(this.productTable.name);
-        let idCompanyIndex = this.productTable.columns.indexOf("id_company");
+        let stockList = await genericDAO.getAll(this.stockTable.name);
+        let idProductIndex = this.stockTable.columns.indexOf("id_product");
 
         let productDTOList = [];
 
-        for(let product of productList){
+        for(let stock of stockList){
 
-            let idCompany = product[idCompanyIndex]
-            let company = await companyDao.getCompanyById(idCompany)
+            let idProduct = stock[idProductIndex]
+            let product = await productDao.getProductById(idProduct);
 
-            productDTOList.push(new StockDTO(product, company))
+            //productDTOList.push(new StockDTO(product, company))
         }
 
         return productDTOList;
     }
 
+    /*
     async getById(productId) {
         let idCompanyIndex = this.productTable.columns.indexOf("id_company");
 
@@ -38,31 +40,12 @@ class StockDao{
 
         return productDTO;
     }
+    */
 
-
-    async saveProduct(productArrayValues){
-        await genericDAO.createItem(this.productTable.name,
-                                           productArrayValues,
-                                           this.productTable.columns.length);
-    }
-
-    async updateProduct(productArrayValues){
-        return await genericDAO.updateItem(this.productTable.name,
-                                           productArrayValues,
-                                           this.productTable.columns.length);
-    }
-
-    async saveOrUpdate(productArrayValues){
-
-        if(productArrayValues[0] === undefined || productArrayValues[0] === ""){
-            return await genericDAO.createItem(this.productTable.name,
-                                         productArrayValues,
-                                         this.productTable.columns.length);
-        }
-
-        return await genericDAO.updateItem(this.productTable.name,
-                                     productArrayValues,
-                                     this.productTable.columns.length);
+    async saveStock(productArrayValues){
+        await genericDAO.createItem(this.stockTable.name,
+                                    productArrayValues,
+                                    this.stockTable.columns.length);
     }
 
 }

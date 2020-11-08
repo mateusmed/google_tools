@@ -14,7 +14,7 @@ function doGet(event) {
       return newPcbuildedPage(event);
 
     case "buyProduct":
-      return renderProductTabPage("buyProduct");
+      return renderBuyProductPage(event);
 
     case "newProduct":
       return newProductPage(event);
@@ -80,6 +80,21 @@ function salePage(event){
 
   return salePage.evaluate();
 }
+
+
+function renderBuyProductPage(event){
+
+  let page = getPage(`view/product/buyProduct/buyProduct`);
+
+  if(event.parameters["id"] === undefined){
+    page["productId"] = "null";
+  }else{
+    page["productId"] = event.parameters["id"];
+  }
+
+  return page.evaluate();
+}
+
 
 function renderProductTabPage(name){
   let page = getPage(`view/product/${name}/${name}`);

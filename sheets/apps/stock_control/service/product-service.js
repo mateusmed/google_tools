@@ -4,6 +4,10 @@ class ProductService{
         return await entityDao.getEntityByType("category");
     }
 
+    async getProductStatus(){
+        return await entityDao.getEntityByType("status");
+    }
+
     async getAllProducts(){
         return await productDao.getAll();
     }

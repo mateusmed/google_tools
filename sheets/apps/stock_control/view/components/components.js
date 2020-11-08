@@ -80,7 +80,6 @@ async function headerMenu(page){
   let mainText = "NEW HARD";
 
   let newProduct = currentUrl() + "/newProduct";
-  let buyProduct = currentUrl() + "/buyProduct";
   let listProduct = currentUrl() + "/listProduct";
 
   let stock = currentUrl() + "/stock";
@@ -115,9 +114,8 @@ async function headerMenu(page){
                     Produto
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="${listProduct}">Lista de produtos</a>
-                      <a class="dropdown-item" href="${newProduct}">Novo Produto</a>                      
-                      <a class="dropdown-item" href="${buyProduct}">Comprar produto</a>
+                      <a class="dropdown-item" href="${listProduct}"> Catalogo / Compra</a>
+                      <a class="dropdown-item" href="${newProduct}">Novo Produto</a>   
                 </div>
           </li>
           <li class="nav-item {new-product}">
@@ -178,6 +176,145 @@ async function simpleTableLink(headerList, itemList){
 
     return table.join("");
 }
+
+
+async function tableStock(headerList, itemList){
+
+    let itemMatriz = await itemList;
+
+    let table = [];
+
+    //se itens for vazio montar uma resposta legal.
+    if(itemList.length === 0){
+
+    }
+
+    table.push(
+        `<div class="table-responsive">
+       <table id="dtBasicExample" 
+           class="table table-striped table-bordered table-sm" 
+           cellspacing="0" 
+           width="50%"> 
+          <thead> 
+            <tr>`);
+
+    headerList.map((item) => {
+        table.push(`<th class="th-sm"> ${item} </th>`);
+    });
+
+    table.push( `</tr> 
+          </thead> 
+        <tbody>`);
+
+    for(let item of itemList){
+
+        let saleDestiny = currentUrl() + `/sale?id=${item.id}`;
+
+        table.push(`<tr>`);
+
+        for(let attribute in item){
+
+            if(typeof(item[attribute]) === "object"){
+                let obj = item[attribute];
+                table.push(`<td> ${obj.name} </td>`);
+            }else{
+                table.push(`<td> ${item[attribute]} </td>`);
+            }
+        }
+
+        table.push(`<td>
+                       <div class="btn-group">
+                           <a class="btn btn-outline-primary" href="${saleDestiny}" role="button">
+                               Vender
+                           </a>
+                       </div>
+                  </td>`);
+
+        table.push(`</tr>`);
+
+    }
+
+    table.push( `  
+                  </tbody> 
+                  </table>
+                  </div>`);
+
+    return table.join("");
+}
+
+
+// todo  pensar em uma tabela generica
+async function tableProduct(headerList, itemList){
+
+    let itemMatriz = await itemList;
+
+    let table = [];
+
+    //se itens for vazio montar uma resposta legal.
+    if(itemList.length === 0){
+
+    }
+
+    table.push(
+        `<div class="table-responsive">
+       <table id="dtBasicExample" 
+           class="table table-striped table-bordered table-sm" 
+           cellspacing="0" 
+           width="50%"> 
+          <thead> 
+            <tr>`);
+
+    headerList.map((item) => {
+        table.push(`<th class="th-sm"> ${item} </th>`);
+    });
+
+    table.push( `</tr> 
+          </thead> 
+        <tbody>`);
+
+    for(let item of itemList){
+
+        let editDestiny = currentUrl() + `/newProduct?id=${item.id}`;
+        let buyDestiny = currentUrl() + `/buyProduct?id=${item.id}`;
+
+        table.push(`<tr>`);
+
+        for(let attribute in item){
+
+            if(typeof(item[attribute]) === "object"){
+                let obj = item[attribute];
+                table.push(`<td> ${obj.name} </td>`);
+            }else{
+                table.push(`<td> ${item[attribute]} </td>`);
+            }
+        }
+
+        table.push(`<td>
+                       <div class="btn-group">
+                           <a class="btn btn-outline-primary" href="${editDestiny}" role="button">
+                               Editar
+                           </a>
+                           
+                           <a class="btn btn-outline-primary" href="${buyDestiny}" role="button">
+                               Comprar
+                           </a>
+                       </div>
+                  </td>`);
+
+        table.push(`</tr>`);
+
+    }
+
+    table.push( `  
+                  </tbody> 
+                  </table>
+                  </div>`);
+
+    return table.join("");
+}
+
+
+
 
 async function tableEditItem(headerList, itemList, destinyUrl){
 
