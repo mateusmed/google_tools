@@ -44,7 +44,7 @@ async function bodyPcBuilded(pcBuildedDTO){
     form.push(`<br>`);
 
     let header = ["Link", "Valor Médio"];
-    form.push(`${ await simpleTableHref(header, pcBuildedDTO.links)}`);
+    form.push(`${ await simpleTableLink(header, pcBuildedDTO.links)}`);
 
     form.push(`<h4 id="costValue">${pcBuildedDTO.costValue}</h4>`)
 

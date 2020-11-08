@@ -1,18 +1,19 @@
 
-async function newProductHtmlBuilded(){
+async function buyProductHtmlBuilded(){
 
-  let newProductPage = [];
+  let buyProductPage = [];
 
   let categoryList = await productService.getAllCategoryProducts();
+  let productList = await productService.getAllProducts();
 
-  newProductPage.push(headerMenu());
-  newProductPage.push("<br/>");
-  newProductPage.push(formNewProduct(categoryList));
+  buyProductPage.push(headerMenu());
+  buyProductPage.push("<br/>");
+  buyProductPage.push(formBuyProduct(categoryList, productList));
   
-  return Promise.all(newProductPage);
+  return Promise.all(buyProductPage);
 }
 
-async function formNewProduct(categoryList){
+async function formBuyProduct(categoryList, productList){
 
   let form = [];
 
@@ -20,15 +21,14 @@ async function formNewProduct(categoryList){
     
                   ${await messageBox()}
             
-                  <h4>Produto:</h4>  
-                
-                  <div class="form-group-father">
-                    ${await input("", "hidden", "id", "", "disabled")}
-                    ${await input("Nome", "text", "name", "")}
-                    ${await input("Descrição", "text", "description", "")}  
+                  <h4>Compra:</h4>
              `);
 
     form.push(`${await selectItem("category", "Escolha uma categoria", categoryList)}
+               <br/>
+               <br/>`);
+
+    form.push(`${await selectItem("product", "Escolha um produto", productList)}
                <br/>`);
 
     form.push(`

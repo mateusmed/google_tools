@@ -146,7 +146,7 @@ async function headerMenu(page){
     return headerMenuList.replace(`{${page}}`, "active")
 }
 
-async function simpleTableHref(headerList, itemList){
+async function simpleTableLink(headerList, itemList){
 
     let table = [];
 
