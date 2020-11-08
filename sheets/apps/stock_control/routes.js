@@ -13,6 +13,9 @@ function doGet(event) {
     case "pcBuilded":
       return newPcbuildedPage(event);
 
+    case "stock":
+      return renderPage("stock");
+
     case "buyProduct":
       return renderBuyProductPage(event);
 

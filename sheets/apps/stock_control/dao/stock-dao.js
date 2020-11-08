@@ -10,18 +10,22 @@ class StockDao{
 
         let stockList = await genericDAO.getAll(this.stockTable.name);
         let idProductIndex = this.stockTable.columns.indexOf("id_product");
+        let idStatusIndex = this.stockTable.columns.indexOf("id_status");
 
-        let productDTOList = [];
+        let stockDTOList = [];
 
         for(let stock of stockList){
 
-            let idProduct = stock[idProductIndex]
-            let product = await productDao.getProductById(idProduct);
+            let idProduct = stock[idProductIndex];
+            let idStatus = stock[idStatusIndex];
 
-            //productDTOList.push(new StockDTO(product, company))
+            let product = await productDao.getProductById(idProduct);
+            let status = await entityDao.getById(idStatus)
+
+            stockDTOList.push(new StockDTO(stock, product, status))
         }
 
-        return productDTOList;
+        return stockDTOList;
     }
 
     /*

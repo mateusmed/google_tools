@@ -31,6 +31,7 @@
              Logger.log("[StockService] received data ", JSON.stringify(data));
 
              //todo criar um metodo que valida o input
+             //todo verificar quanto a empresa tem de saldo para poder debitar
 
              let array = ["",
                           data.id,

@@ -58,16 +58,15 @@ class ProductDTO {
 }
 
 class StockDTO {
-    constructor(product, company) {
+    constructor(stock, product, status) {
         let stockTable = database.getTable("stock");
 
         this.id = product[stockTable.columns.indexOf("id")];
-        this.name = product[stockTable.columns.indexOf("name")];
-        this.quantity = product[stockTable.columns.indexOf("quantity")];
-        this.purchaseUnitPrice  = product[stockTable.columns.indexOf("purchase_unit_price")];
-        this.estimatedUnitSalePrice = product[stockTable.columns.indexOf("estimated_unit_sale_price")];
-        this.description  = product[stockTable.columns.indexOf("description")];
-        this.company = company;
+        this.product = product;
+        this.status = status;
+        this.quantity  = stock[stockTable.columns.indexOf("quantity")];
+        this.valueUnit = stock[stockTable.columns.indexOf("value_unit")];
+        this.date = stock[stockTable.columns.indexOf("date")];
     }
 }
 

@@ -22,7 +22,7 @@ class AAdatabase {
                       "id_product",
                       "id_status",
                       "quantity",
-                      "purchase_unit_price",
+                      "value_unit",
                       "date"],
 
             "investment": ["id",

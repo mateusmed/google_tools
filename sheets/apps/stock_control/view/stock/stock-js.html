@@ -2,13 +2,19 @@
 <script>
 
     $(function() {
-        google.script.run.withSuccessHandler(renderProductPage).productHtmlBuilded(productId);
+        google.script.run.withSuccessHandler(renderProductPage).stockHtmlBuilded();
     });
 
     function renderProductPage(html) {
     
        var productPage = $('#product');
        productPage.html(html);
+
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+
        document.getElementById("save").addEventListener("click", save);
     }
     
