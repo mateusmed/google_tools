@@ -12,18 +12,19 @@ class SaleService{
 
             Logger.log("[saleService] received data ", JSON.stringify(data));
 
-            let productDTO =  await productDAO.getById(data.productId);
+            let stock = stockService.getStockById(data.id)
+
 
             Logger.log("[saleService] productDTO ", JSON.stringify(productDTO));
 
-            let newQuantity = productDTO.quantity - data.qtdSale;
+            let newQuantity = stock.quantity - data.qtdSale;
 
             if(newQuantity < 0){
                 Logger.log("[saleService] quantidade indisponível ");
                 return await renderMessageResponse("warning", "Quantidade indisponível");
             }
 
-            productDTO.quantity = newQuantity;
+            stock.quantity = newQuantity;
 
             Logger.log("[saleService] stock ", JSON.stringify(productDTO));
 

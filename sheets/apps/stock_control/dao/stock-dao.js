@@ -28,23 +28,22 @@ class StockDao{
         return stockDTOList;
     }
 
-    /*
-    async getById(productId) {
-        let idCompanyIndex = this.productTable.columns.indexOf("id_company");
 
-        let product = await genericDAO.getById(this.productTable.name, productId);
+    async getById(stockId) {
 
-        let idCompany = product[idCompanyIndex];
+        let stock = await genericDAO.getById(this.stockTable.name, stockId);
+        let idProductIndex = this.stockTable.columns.indexOf("id_product");
+        let idStatusIndex = this.stockTable.columns.indexOf("id_status");
 
-        let company = await companyDao.getCompanyById(idCompany);
+        let idProduct = stock[idProductIndex];
+        let idStatus = stock[idStatusIndex];
 
-        let productDTO = new StockDTO(product, company);
+        let product = await productDao.getProductById(idProduct);
+        let status = await entityDao.getById(idStatus)
 
-        Logger.log("[productDao - company] ", JSON.stringify(productDTO));
-
-        return productDTO;
+        return new StockDTO(stock, product, status);
     }
-    */
+
 
     async saveStock(productArrayValues){
         await genericDAO.createItem(this.stockTable.name,

@@ -104,6 +104,12 @@ function renderProductTabPage(name){
   return page.evaluate();
 }
 
+
+function renderStockPage(name){
+  let page = getPage(`view/stock/listStock/${name}`);
+  return page.evaluate();
+}
+
 function renderPage(name){
   let page = getPage(`view/${name}/${name}`);
   return page.evaluate();

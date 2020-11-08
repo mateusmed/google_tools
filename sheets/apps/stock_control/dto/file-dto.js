@@ -61,12 +61,12 @@ class StockDTO {
     constructor(stock, product, status) {
         let stockTable = database.getTable("stock");
 
-        this.id = product[stockTable.columns.indexOf("id")];
+        this.id = stock[stockTable.columns.indexOf("id")];
         this.product = product;
         this.status = status;
         this.quantity  = stock[stockTable.columns.indexOf("quantity")];
         this.valueUnit = stock[stockTable.columns.indexOf("value_unit")];
-        this.date = stock[stockTable.columns.indexOf("date")];
+        this.date = getDate(stock[stockTable.columns.indexOf("date")]);
     }
 }
 

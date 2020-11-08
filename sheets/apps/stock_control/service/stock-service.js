@@ -24,6 +24,9 @@
          return await stockDAO.getAll();
      }
 
+     async getStockById(id){
+         return await stockDAO.getById(id);
+     }
 
      async saveStockProduct(data){
 
@@ -53,6 +56,16 @@
                                          `ocorreu um erro inesperado ${error}`);
          }
      }
+
+     async sellStock(data){
+
+         try{
+
+
+         }catch (error){
+
+         }
+     }
  }
 
  //--------------------------- call from page
@@ -60,6 +73,10 @@
  async function saveStockProduct(data){
      return await stockService.saveStockProduct(data);
  }
+
+ async function sellStockProduct(data){
+    return await stockService.sellStock(data);
+}
 
 
  const stockService = new StockService();

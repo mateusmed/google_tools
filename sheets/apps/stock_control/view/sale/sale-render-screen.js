@@ -7,7 +7,7 @@ async function saleHtmlBuilded(productId, productName, qtd){
 
     //todo pegar todas as vendas
 
-    let sales =  await saleService.getAllSales();
+    //let sales =  await saleService.getAllSales();
 
     let headerList = ["id",
                       "Data Venda",
@@ -15,6 +15,7 @@ async function saleHtmlBuilded(productId, productName, qtd){
                       "Quantidade",
                       "Preço unidade venda"];
 
+    /*
     if(productId === undefined || productId === "undefined"){
         salePage.push(headerMenu());
         salePage.push("<br/>");
@@ -24,6 +25,7 @@ async function saleHtmlBuilded(productId, productName, qtd){
         salePage.push("<br/>");
         return Promise.all(salePage);
     }
+     */
 
     Logger.log("Sale stock: ", JSON.stringify(productId));
 

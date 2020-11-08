@@ -92,8 +92,6 @@ async function headerMenu(page){
 
   let pcBuilded = currentUrl() + "/pcBuilded";
 
-
-
     let headerMenuList = `<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
                         <a class="navbar-brand" href="${currentUrl()}">${mainText}</a>
                        <button class="navbar-toggler" 
@@ -208,7 +206,7 @@ async function tableStock(headerList, itemList){
 
     for(let item of itemList){
 
-        let saleDestiny = currentUrl() + `/sale?id=${item.id}`;
+        let saleDestiny = currentUrl() + `/sale?productId=${item.id}&qtd=${item.quantity}&productName=${item.product.name}`;
 
         table.push(`<tr>`);
 
